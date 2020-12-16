@@ -1,6 +1,8 @@
 <template>
     <a-layout :style="{minHeight:'100vh'}">
-        <a-layout-sider v-model:collapsed="collapsed">
+        <a-layout-sider
+			:collapsedWidth="50"
+			v-model:collapsed="collapsed">
             <Brand/>
             <Menu/>
         </a-layout-sider>

@@ -50,7 +50,8 @@
             //菜单刷新定位
             let keyPath = localStorage.getItem('menuKeyPath') || [];
             if (keyPath.length >0){
-                this.current = JSON.parse(keyPath)
+                this.current = JSON.parse(keyPath);
+                this.$router.push(this.current[0])
             }
         },
         methods:{
@@ -68,7 +69,15 @@
         font-size: 16px;
         vertical-align: -3px;
     }
-    >>> .ant-menu-item{
+    >>> .ant-menu>.ant-menu-item{
         padding-left: 32px;
+    }
+    .ant-menu-inline-collapsed {
+        width: auto;
+    }
+    .ant-menu-inline-collapsed > .ant-menu-item{
+        padding: 0 !important;
+        text-align: center;
+        width: 50px;
     }
 </style>

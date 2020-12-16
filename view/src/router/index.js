@@ -7,13 +7,13 @@ const routes = [
     name: '',
     component: Layout,
     children:[
-      {path:'/',name:'Home',components: ()=>import('../views/Home')},
-      {path:'/tasks',name:'Tasks',components: ()=>import('../views/tasks/Index')},
-      {path:'/project',name:'Project',components: ()=>import('../views/project/Index')},
-      {path:'/finance',name:'Finance',components: ()=>import('../views/finance/Index')},
-      {path:'/products',name:'Products',components: ()=>import('../views/products/Index')},
-      {path:'/crm',name:'Crm',components: ()=>import('../views/crm/Index')},
-      {path:'/member',name:'Member',components: ()=>import('../views/member/Index')},
+      {path:'/',name:'Home',component: ()=>import('../views/Home')},
+      {path:'/tasks',name:'Tasks',component: ()=>import('../views/tasks/Index')},
+      {path:'/project',name:'Project',component: ()=>import('../views/project/Index')},
+      {path:'/finance',name:'Finance',component: ()=>import('../views/finance/Index')},
+      {path:'/products',name:'Products',component: ()=>import('../views/products/Index')},
+      {path:'/crm',name:'Crm',component: ()=>import('../views/crm/Index')},
+      {path:'/member',name:'Member',component: ()=>import('../views/member/Index')},
     ]
   }
 ];
