@@ -1,28 +1,24 @@
 <template>
     <section class="wrapper">
-        <div class="wrapper-header">
-            <a-breadcrumb>
-                <a-breadcrumb-item><router-link to="/">工作台</router-link></a-breadcrumb-item>
-                <a-breadcrumb-item>项目管理</a-breadcrumb-item>
-                <a-breadcrumb-item>项目列表</a-breadcrumb-item>
-            </a-breadcrumb>
-            <div class="wrapper-header-title">项目管理</div>
-        </div>
+        <Header title="项目管理" :bread-crumb="['项目管理','项目列表']"/>
         <div class="wrapper-content">
             <CreateProject/>
             <CreateQuoted/>
+            <ProjectList/>
         </div>
-
     </section>
 </template>
 
 <script>
     import CreateProject from "./components/CreateProject";
     import CreateQuoted from "./components/CreateQuoted";
+    import Header from "../../components/Header";
+    import ProjectList from "./components/ProjectList";
+
     export default {
         name: "Project",
         components:{
-            CreateProject,CreateQuoted
+            CreateProject,CreateQuoted,Header, ProjectList
         }
     }
 </script>
