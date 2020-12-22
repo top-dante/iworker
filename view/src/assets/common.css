@@ -17,3 +17,20 @@
 .wrapper-content{
     padding: 24px;
 }
+.toolbar {
+    margin: 10px 0 30px;
+    display: flex;
+}
+.toolbar-item {
+    flex: 1;
+}
+.ant-btn-sm {
+    font-size: 12px;
+}
+.ant-btn-sm .anticon {
+    font-size: 14px;
+}
+.ant-dropdown-menu-item > .anticon{
+    font-size: 14px !important;
+    margin-right: 6px !important;
+}

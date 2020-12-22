@@ -5,11 +5,11 @@
             添加项目
         </a-button>
         <a-modal :visible="visible"
-                 :width="420"
+                 :width="360"
                  title="快速添加项目"
                  @ok="handleOk"
                  @cancel="close">
-
+            <a-input placeholder="请输入项目名称"/>
         </a-modal>
     </span>
 </template>
