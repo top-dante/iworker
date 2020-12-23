@@ -5,7 +5,9 @@
                 v-model:current="current"
                 v-model:pageSize="pageSize"
                 :total="total"
+                :hideOnSinglePage="true"
                 :show-total="total => `共 ${total} 条记录`"
+                @change="onChange"
                 @showSizeChange="onShowSizeChange"
         >
             <template #itemRender="{type, originalElement }">
@@ -28,6 +30,11 @@
             total:{
                 type:Number,
                 default:0
+            },
+            callback:{
+                type: function () {
+
+                }
             }
         },
         components: {
@@ -41,7 +48,10 @@
         },
         methods:{
             onShowSizeChange(current, pageSize) {
-                console.log(current, pageSize);
+                this.$emit('params',{page:current,pageSize:pageSize})
+            },
+            onChange(page, pageSize){
+                this.$emit('params',{page:page,pageSize:pageSize})
             }
         }
     }

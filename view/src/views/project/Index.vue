@@ -20,6 +20,7 @@
                             {{item.title}}
                         </a-radio-button>
                     </a-radio-group>
+<!--                    状态选择-->
                     <a-select :style="{width: '120px',marginLeft: '12px'}"
                               placeholder="选择业务员">
                         <a-select-option value="jack">
@@ -35,23 +36,14 @@
                             已完成
                         </a-select-option>
                     </a-select>
+<!--                    搜索-->
                     <a-input-search
                             placeholder="请输入关键字查询"
                             :style="{width:'200px',margin:'0 12px'}"/>
-                    <a-radio-group button-style="solid"
-                                   @change="changeList"
-                                   v-model:value="listType">
-                        <a-radio-button value="card">
-                            <AppstoreOutlined/>
-                        </a-radio-button>
-                        <a-radio-button value="list">
-                            <BarsOutlined/>
-                        </a-radio-button>
-                    </a-radio-group>
                 </div>
             </div>
-            <component :is="isComponent"/>
-            <Pagination/>
+            <ProjectList/>
+            <Pagination :total="150"/>
         </div>
     </section>
 </template>
@@ -59,27 +51,19 @@
 <script>
     import CreateProject from "./components/CreateProject";
     import Header from "../../components/Header";
-    import ProjectCard from "./components/ProjectCard";
     import ProjectList from "./components/ProjectList";
     import Pagination from "../../components/Pagination";
-    import {
-        ExportOutlined,
-        BarsOutlined,
-        AppstoreOutlined
-    } from '@ant-design/icons-vue'
+    import {ExportOutlined} from '@ant-design/icons-vue'
 
 
     export default {
         name: "Project",
         components:{
             CreateProject,
-            ProjectList,
             Header,
-            ProjectCard,
             ExportOutlined,
-            BarsOutlined,
-            AppstoreOutlined,
-            Pagination
+            Pagination,
+            ProjectList
         },
         data(){
             return {
