@@ -7,7 +7,7 @@ const routes = [
     name: '',
     component: Layout,
     children:[
-      {path:'/',name:'Home',component: ()=>import('../views/Home')},
+      {path:'/home',name:'Home',component: ()=>import('../views/Home')},
       {path:'/tasks',name:'Tasks',component: ()=>import('../views/tasks/Index')},
       {path:'/project',name:'Project',component: ()=>import('../views/project/Index')},
       {path:'/finance',name:'Finance',component: ()=>import('../views/finance/Index')},
