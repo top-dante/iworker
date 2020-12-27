@@ -51,7 +51,7 @@
             let keyPath = localStorage.getItem('menuKeyPath') || [];
             if (keyPath.length >0){
                 this.current = JSON.parse(keyPath);
-                this.$router.push(this.current[0])
+              //  this.$router.push(this.current[0])
             }
         },
         methods:{
