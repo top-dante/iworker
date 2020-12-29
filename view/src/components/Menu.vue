@@ -69,8 +69,8 @@
         font-size: 16px;
         vertical-align: -3px;
     }
-    >>> .ant-menu>.ant-menu-item{
-        padding-left: 32px;
+    .ant-menu >>> .ant-menu-item{
+        padding-left: 30px;
     }
     .ant-menu-inline-collapsed {
         width: auto;
