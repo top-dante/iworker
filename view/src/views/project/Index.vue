@@ -42,6 +42,9 @@
                             :style="{width:'200px',margin:'0 12px'}"/>
                 </div>
             </div>
+            <a-divider/>
+            <a-button @click="httpTest">请求测试</a-button>
+            <a-divider/>
             <ProjectList/>
             <Pagination :total="150"/>
         </div>
@@ -53,7 +56,8 @@
     import Header from "../../components/Header";
     import ProjectList from "./components/ProjectList";
     import Pagination from "../../components/Pagination";
-    import {ExportOutlined} from '@ant-design/icons-vue'
+    import {ExportOutlined} from '@ant-design/icons-vue';
+    import {get} from '@/plugins/http'
 
 
     export default {
@@ -85,6 +89,10 @@
                } else {
                    this.isComponent = 'ProjectList'
                }
+            },
+            httpTest(){
+                console.log(get())
+                get('project/create_project')
             }
         }
     }

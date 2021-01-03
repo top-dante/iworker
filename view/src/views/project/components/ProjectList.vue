@@ -33,6 +33,8 @@
                     <a-menu>
                         <a-menu-item><PlusSquareOutlined/>添加任务</a-menu-item>
                         <a-menu-item><FileSyncOutlined/>进度修改</a-menu-item>
+                        <a-menu-item><BarsOutlined/>报价清单</a-menu-item>
+                        <a-menu-divider/>
                         <a-menu-item><FormOutlined/>编辑</a-menu-item>
                         <a-menu-item><DeleteOutlined/>删除</a-menu-item>
                     </a-menu>
@@ -49,7 +51,8 @@
         PlusSquareOutlined,
         DownOutlined,
         FormOutlined,
-        DeleteOutlined
+        DeleteOutlined,
+        BarsOutlined
     } from '@ant-design/icons-vue'
     export default {
         name: "ProjectList",
@@ -59,7 +62,8 @@
             PlusSquareOutlined,
             DownOutlined,
             FormOutlined,
-            DeleteOutlined
+            DeleteOutlined,
+            BarsOutlined,
         },
         setup(){
             const columns=[

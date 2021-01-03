@@ -18,6 +18,7 @@
         TeamOutlined,
         ScheduleOutlined,
         ContactsOutlined,
+        CheckCircleOutlined,
         GiftOutlined
     } from  '@ant-design/icons-vue'
 
@@ -31,14 +32,16 @@
             ScheduleOutlined,
             ContactsOutlined,
             GiftOutlined,
+            CheckCircleOutlined
         },
         data(){
             return {
                 current:[],
                 list: [
                     {title: '工作台', path: '/',icon:'DesktopOutlined'},
-                    {title: '任务管理', path: '/tasks',icon:'ScheduleOutlined'},
+                    {title: '任务管理', path: '/tasks',icon:'CheckCircleOutlined'},
                     {title: '项目管理', path: '/project',icon:'ProjectOutlined'},
+                    {title: '工作计划', path: '/plans',icon:'ScheduleOutlined'},
                     {title: '账务管理', path: '/finance',icon:'PropertySafetyOutlined'},
                     {title: '产品库', path: '/products',icon:'GiftOutlined'},
                     {title: '客户CRM', path: '/crm',icon:'ContactsOutlined'},
