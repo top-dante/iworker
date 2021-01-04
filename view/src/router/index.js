@@ -10,6 +10,7 @@ const routes = [
       {path:'/',name:'Home',component: ()=>import('../views/Home')},
       {path:'/tasks',name:'Tasks',component: ()=>import('../views/tasks/Index')},
       {path:'/project',name:'Project',component: ()=>import('../views/project/Index')},
+      {path:'/plans',name:'Plus',component: ()=>import('../views/plans/Index')},
       {path:'/finance',name:'Finance',component: ()=>import('../views/finance/Index')},
       {path:'/products',name:'Products',component: ()=>import('../views/products/Index')},
       {path:'/crm',name:'Crm',component: ()=>import('../views/crm/Index')},
