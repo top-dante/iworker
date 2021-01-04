@@ -54,7 +54,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/public" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
@@ -146,10 +146,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="408" y="242" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1609771395656" />
-    <state x="554" y="184" key="CommitChangelistDialog2" timestamp="1609771459272">
+    <state x="554" y="184" key="CommitChangelistDialog2" timestamp="1609771506135">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="554" y="184" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1609771459272" />
+    <state x="554" y="184" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1609771506135" />
     <state x="734" y="342" key="FileChooserDialogImpl" timestamp="1609770695577">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -174,9 +174,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="520" y="274" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1609769501430" />
-    <state x="546" y="313" key="Vcs.Push.Dialog.v2" timestamp="1609769480074">
+    <state x="546" y="313" key="Vcs.Push.Dialog.v2" timestamp="1609771507844">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="546" y="313" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1609769480074" />
+    <state x="546" y="313" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1609771507844" />
   </component>
 </project>
