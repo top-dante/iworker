@@ -54,7 +54,9 @@
                     </a-menu-item>
                     <a-menu-divider/>
                     <a-menu-item>
-                        <MenuOutlined/>全局设置
+                      <router-link to="/setting">
+                        <MenuOutlined/> 全局设置
+                      </router-link>
                     </a-menu-item>
                     <a-menu-item>
                         <ShareAltOutlined/>邀请同事

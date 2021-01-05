@@ -15,6 +15,7 @@ const routes = [
       {path:'/products',name:'Products',component: ()=>import('../views/products/Index')},
       {path:'/crm',name:'Crm',component: ()=>import('../views/crm/Index')},
       {path:'/member',name:'Member',component: ()=>import('../views/member/Index')},
+      {path:'/setting',name:'Setting',component: ()=>import('../views/setting/Index')}
     ]
   }
 ];

@@ -2,15 +2,15 @@
 Navicat MariaDB Data Transfer
 
 Source Server         : localhost
-Source Server Version : 100508
+Source Server Version : 100312
 Source Host           : localhost:3306
 Source Database       : rita_crm
 
 Target Server Type    : MariaDB
-Target Server Version : 100508
+Target Server Version : 100312
 File Encoding         : 65001
 
-Date: 2021-01-04 22:45:17
+Date: 2021-01-05 18:23:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `rita_admin_user`;
 CREATE TABLE `rita_admin_user` (
-  `user_id` varchar(16) NOT NULL,
+  `openid` varchar(18) NOT NULL,
   `username` varchar(50) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `code` varchar(24) NOT NULL,
@@ -32,9 +32,13 @@ CREATE TABLE `rita_admin_user` (
   `last_ip` varchar(50) DEFAULT NULL,
   `last_time` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT 1,
-  PRIMARY KEY (`user_id`),
+  PRIMARY KEY (`openid`),
   KEY `username` (`username`,`email`,`mobile`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of rita_admin_user
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for rita_customer
@@ -46,12 +50,16 @@ CREATE TABLE `rita_customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
+-- Records of rita_customer
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for rita_group
 -- ----------------------------
 DROP TABLE IF EXISTS `rita_group`;
 CREATE TABLE `rita_group` (
-  `group_id` varchar(16) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `group_id` varchar(18) NOT NULL,
+  `user_id` varchar(18) DEFAULT '',
   `group_name` varchar(120) NOT NULL,
   `group_mobile` varchar(100) DEFAULT NULL,
   `group_address` varchar(255) DEFAULT NULL,
@@ -63,15 +71,26 @@ CREATE TABLE `rita_group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
+-- Records of rita_group
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for rita_group_department
 -- ----------------------------
 DROP TABLE IF EXISTS `rita_group_department`;
 CREATE TABLE `rita_group_department` (
-  `map_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`map_id`)
+  `depart_id` int(11) NOT NULL,
+  `pid` int(11) DEFAULT 0,
+  `group_id` varchar(18) NOT NULL,
+  `user_id` varchar(18) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `status` int(11) DEFAULT 1,
+  PRIMARY KEY (`depart_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of rita_group_department
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for rita_group_map
@@ -85,11 +104,15 @@ CREATE TABLE `rita_group_map` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
+-- Records of rita_group_map
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for rita_group_member
 -- ----------------------------
 DROP TABLE IF EXISTS `rita_group_member`;
 CREATE TABLE `rita_group_member` (
-  `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(18) NOT NULL,
   `username` varchar(50) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `code` varchar(24) NOT NULL,
@@ -103,7 +126,11 @@ CREATE TABLE `rita_group_member` (
   `status` int(11) DEFAULT 1,
   PRIMARY KEY (`user_id`),
   KEY `username` (`username`,`email`,`mobile`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of rita_group_member
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for rita_product
@@ -113,6 +140,10 @@ CREATE TABLE `rita_product` (
   `product_id` int(11) NOT NULL,
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of rita_product
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for rita_project
@@ -134,6 +165,10 @@ CREATE TABLE `rita_project` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
+-- Records of rita_project
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for rita_project_lists
 -- ----------------------------
 DROP TABLE IF EXISTS `rita_project_lists`;
@@ -142,6 +177,10 @@ CREATE TABLE `rita_project_lists` (
   `project_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of rita_project_lists
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for rita_tasks
@@ -161,3 +200,7 @@ CREATE TABLE `rita_tasks` (
   PRIMARY KEY (`id`),
   KEY `title` (`title`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of rita_tasks
+-- ----------------------------

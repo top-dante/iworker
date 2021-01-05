@@ -17,7 +17,9 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/topthink/think-helper" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/topthink/think-multi-app" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/topthink/think-orm" />
+      <excludeFolder url="file://$MODULE_DIR$/view/node_modules" />
     </content>
+    <content url="file://$MODULE_DIR$/view/node_modules" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

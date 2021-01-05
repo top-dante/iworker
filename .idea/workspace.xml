@@ -2,33 +2,53 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="766f0d11-f01a-4ccc-a347-f3710a321468" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/data/rita_crm.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/app/api/controller/Member.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/app/api/model/AdminUser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/app/api/model/Group.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/app/api/model/GroupMap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/app/api/model/GroupMember.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/app/api/model/Project.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/extend/utils/SignatureHelper.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/extend/utils/Uuid.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/src/views/setting/Index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/rita.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/rita.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.example.env" beforeDir="false" afterPath="$PROJECT_DIR$/app/.example.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app/api/common.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/api/common.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app/api/controller/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/api/controller/Project.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app/common.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/common.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/extend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/components/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/src/components/Menu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/components/Menu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/src/components/TopRight.vue" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/components/TopRight.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/router/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/app/composer.json</pharConfigPath>
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="tsconfig.json" />
         <option value="package.json" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.3">
     <include_path>
       <path value="$PROJECT_DIR$/app/vendor/league/flysystem" />
       <path value="$PROJECT_DIR$/app/vendor/psr/simple-cache" />
@@ -49,26 +69,34 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mariadb" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="database.data.extractors.current.export.id" value="JSON-Groovy.json.groovy" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\repository\rita\app" />
       <recent name="E:\rita\data" />
       <recent name="E:\rita\app" />
       <recent name="E:\rita\release" />
       <recent name="E:\rita" />
     </key>
   </component>
-  <component name="RunManager" selected="Compound.dev">
+  <component name="RunManager" selected="PHP Built-in Web Server.api-server">
     <configuration default="true" type="CompoundRunConfigurationType">
       <toRun name="serve" type="js.build_tools.npm" />
       <toRun name="api-server" type="PhpBuiltInWebServerConfigurationType" />
@@ -99,6 +127,7 @@
       <item itemvalue="PHP Built-in Web Server.api-server" />
     </list>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -110,6 +139,7 @@
       <option name="presentableId" value="Default" />
       <updated>1609769022078</updated>
       <workItem from="1609769026100" duration="2712000" />
+      <workItem from="1609814245709" duration="19587000" />
     </task>
     <task id="LOCAL-00001" summary="更新目录结构 尝试修复 eslint-plugin-vue 报错">
       <created>1609769478423</created>
@@ -143,7 +173,10 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.env" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -151,50 +184,8 @@
     <MESSAGE value="同步多端开发配置" />
     <option name="LAST_COMMIT_MESSAGE" value="同步多端开发配置" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="534" y="242" key="#CLI_Interpreters" timestamp="1609771355691">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="534" y="242" key="#CLI_Interpreters/0.0.1920.1040@0.0.1920.1040" timestamp="1609771355691" />
-    <state x="636" y="175" key="#PHP" timestamp="1609771357600">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="636" y="175" key="#PHP/0.0.1920.1040@0.0.1920.1040" timestamp="1609771357600" />
-    <state x="408" y="242" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609771395656">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="408" y="242" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1609771395656" />
-    <state x="554" y="184" key="CommitChangelistDialog2" timestamp="1609771617256">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="554" y="184" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1609771617256" />
-    <state x="734" y="342" key="FileChooserDialogImpl" timestamp="1609770695577">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="734" y="342" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1609770695577" />
-    <state width="1402" height="212" key="GridCell.Tab.0.bottom" timestamp="1609771437043">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1402" height="212" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1609771437043" />
-    <state width="1402" height="212" key="GridCell.Tab.0.center" timestamp="1609771437043">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1402" height="212" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1609771437043" />
-    <state width="1402" height="212" key="GridCell.Tab.0.left" timestamp="1609771437043">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1402" height="212" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1609771437043" />
-    <state width="1402" height="212" key="GridCell.Tab.0.right" timestamp="1609771437043">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1402" height="212" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1609771437043" />
-    <state x="520" y="274" key="SettingsEditor" timestamp="1609769501430">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="520" y="274" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1609769501430" />
-    <state x="546" y="313" key="Vcs.Push.Dialog.v2" timestamp="1609771621012">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="546" y="313" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1609771621012" />
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
