@@ -17,7 +17,18 @@ const routes = [
       {path:'/member',name:'Member',component: ()=>import('../views/member/Index')},
       {path:'/setting',name:'Setting',component: ()=>import('../views/setting/Index')}
     ]
-  }
+  },
+  {
+    path:'',
+    name:'User',
+    component: ()=>import('../views/user/Index'),
+    children: [
+      { path:'/user/login',name:'Login',component: ()=>import('../views/user/Login')},
+      { path:'/user/register',name:'Register',component: ()=>import('../views/user/Register')},
+      { path:'/user/recover',name:'Recover',component: ()=>import('../views/user/Recover')},
+    ]
+  },
+
 ];
 
 const router = createRouter({
