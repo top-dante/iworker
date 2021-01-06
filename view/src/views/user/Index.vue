@@ -1,6 +1,12 @@
 <template>
   <a-layout :style="{minHeight:'100vh'}">
-    <a-layout-header class="header"></a-layout-header>
+    <a-layout-header class="header">
+      <div class="brand">
+        <img src="./../../assets/brand.png" class="logo" width="30" alt="">
+        <span class="title">RitaCRM</span>
+        <span class="desc">简单工作，快乐生活！</span>
+      </div>
+    </a-layout-header>
     <a-layout-content>
       <router-view/>
     </a-layout-content>
@@ -39,5 +45,23 @@ export default {
 .links>a {
   color: rgba(0,0,0,.55);
   margin: 0 15px;
+}
+.brand {
+  flex: 1;
+  line-height: 45px;
+  overflow: hidden;
+  height: 50px;
+}
+.title {
+  font-size: 20px;
+  margin-right: 8px;
+  color: rgba(0,0,0,.85);
+  font-weight: 600;
+}
+.brand .logo {
+  margin-right: 4px;
+  display: inline-block;
+  vertical-align: -8px;
+  border-radius: 50%;
 }
 </style>

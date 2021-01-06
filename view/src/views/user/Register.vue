@@ -1,9 +1,9 @@
 <template>
   <div class="register-box">
-    <h2 class="title">用户登录 <span>简单工作，快乐生活！</span></h2>
+    <h2 class="title">新用户注册 <span>简单工作，快乐生活！</span></h2>
     <a-form layout="vertical">
       <a-form-item>
-        <a-input placeholder="用户名/手机/邮箱"
+        <a-input placeholder="用户名"
                  :style="{width:'100%'}"
                  size="large">
           <template #prefix>
@@ -14,43 +14,47 @@
       <a-form-item>
         <a-input-password
             size="large"
-            placeholder="用户名/手机/邮箱">
+            placeholder="至少六位数，区分大小写">
           <template #prefix>
             <LockOutlined/>
           </template>
         </a-input-password>
       </a-form-item>
       <a-form-item>
-        <a-checkbox>自动登录</a-checkbox>
-        <router-link to="/user/recover" :style="{float:'right'}">忘记密码</router-link>
+        <a-input-password
+            size="large"
+            placeholder="确认密码">
+          <template #prefix>
+            <LockOutlined/>
+          </template>
+        </a-input-password>
       </a-form-item>
-      <a-form-item>
-        <a-button type="primary" size="large" block>确定</a-button>
+      <a-form-item help="暂不支持国外手机号码注册">
+        <a-input
+            size="large"
+            placeholder="手机号码">
+          <template #prefix>
+            <MobileOutlined />
+          </template>
+        </a-input>
       </a-form-item>
-      <a-form-item>
-        <span :style="{marginRight:'12px'}">其他登录方式</span>
-        <a href="javascript:;" class="user-login-other">
-          <a-avatar size="small">
-            <template #icon>
-              <WechatOutlined/>
-            </template>
-          </a-avatar>
-        </a>
-        <a href="javascript:;" class="user-login-other">
-          <a-avatar size="small" :style="{margin:'0 12px'}">
-            <template #icon>
-              <QqOutlined/>
-            </template>
-          </a-avatar>
-        </a>
-        <a href="javascript:;" class="user-login-other">
-          <a-avatar size="small">
-            <template #icon>
-              <DingdingOutlined/>
-            </template>
-          </a-avatar>
-        </a>
-        <router-link to="/user/register" :style="{float:'right'}">新用户注册</router-link>
+      <a-form-item help="六位数短信验证码">
+        <a-row :gutter="20">
+          <a-col :span="16">
+            <a-input size="large" placeholder="短信验证码">
+              <template #prefix><VerifiedOutlined /></template>
+            </a-input>
+          </a-col>
+          <a-col :span="8">
+            <a-button block size="large">获取验证码</a-button>
+          </a-col>
+        </a-row>
+      </a-form-item>
+      <a-form-item :style="{marginTop:'24px'}">
+        <a-button type="primary" size="large" :style="{width: '50%'}">注册</a-button>
+        <router-link to="/user/login" :style="{float:'right',lineHeight:'40px'}">
+          使用已有账号登录
+        </router-link>
       </a-form-item>
     </a-form>
   </div>
@@ -60,9 +64,8 @@
 import {
   UserOutlined,
   LockOutlined,
-  WechatOutlined,
-  QqOutlined,
-  DingdingOutlined
+  MobileOutlined,
+  VerifiedOutlined
 } from '@ant-design/icons-vue'
 
 export default {
@@ -70,9 +73,8 @@ export default {
   components: {
     UserOutlined,
     LockOutlined,
-    WechatOutlined,
-    QqOutlined,
-    DingdingOutlined
+    MobileOutlined,
+    VerifiedOutlined
   }
 }
 </script>
