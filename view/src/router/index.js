@@ -3,7 +3,7 @@ import Layout from '../views/Layout.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '',
     name: '',
     component: Layout,
     children:[
@@ -19,13 +19,14 @@ const routes = [
     ]
   },
   {
-    path:'',
+    path:'/user',
+    redirect:'/user/login',
     name:'User',
     component: ()=>import('../views/user/Index'),
     children: [
-      { path:'/user/login',name:'Login',component: ()=>import('../views/user/Login')},
-      { path:'/user/register',name:'Register',component: ()=>import('../views/user/Register')},
-      { path:'/user/recover',name:'Recover',component: ()=>import('../views/user/Recover')},
+      { path:'login',name:'Login',component: ()=>import('../views/user/Login')},
+      { path:'register',name:'Register',component: ()=>import('../views/user/Register')},
+      { path:'recover',name:'Recover',component: ()=>import('../views/user/Recover')},
     ]
   },
 

@@ -10,7 +10,7 @@ Target Server Type    : MariaDB
 Target Server Version : 100312
 File Encoding         : 65001
 
-Date: 2021-01-05 18:23:33
+Date: 2021-01-07 18:03:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,6 @@ CREATE TABLE `rita_admin_user` (
   `openid` varchar(18) NOT NULL,
   `username` varchar(50) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  `code` varchar(24) NOT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `email` varchar(120) DEFAULT NULL,
   `mobile` varchar(50) DEFAULT NULL,
@@ -39,6 +38,8 @@ CREATE TABLE `rita_admin_user` (
 -- ----------------------------
 -- Records of rita_admin_user
 -- ----------------------------
+INSERT INTO `rita_admin_user` VALUES ('0id5ff6788dcc745f1', 'admin1', '$2y$10$pySJeo0Wz5i5b4S0m8z/8Oh3FIQC.xwrc8Q0wkvijEA1JrRjH0szO', null, null, '62e0e0ode0dmqhe0e0kfod', '0.0.0.0', '1609988237', '0.0.0.0', '1609988237', '1');
+INSERT INTO `rita_admin_user` VALUES ('50e5ff678173a4eas8', 'admin', '$2y$10$FZEKIpRK/fIat2CDRXYjSe75GLmvt2wKPjGGB.uenfgDxc9lTEmTW', null, null, '62e0e0ode0dmqhe0e0kfod', '0.0.0.0', '1609988119', '0.0.0.0', '1609988119', '1');
 
 -- ----------------------------
 -- Table structure for rita_customer

@@ -31,11 +31,9 @@ instance.interceptors.request.use(
  */
 instance.interceptors.response.use(
     function(response) {
-      // Do something with response data
-      return response;
+      return response.data;
     },
     function(error) {
-      // Do something with response error
       return Promise.reject(error);
     }
   );

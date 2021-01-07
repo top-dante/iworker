@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="766f0d11-f01a-4ccc-a347-f3710a321468" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/src/assets/brand.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/app/api/controller/Account.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/src/views/user/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/views/user/Index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/src/views/user/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/views/user/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app/api/model/AdminUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/api/model/AdminUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app/api/route/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/api/route/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/src/plugins/http.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/plugins/http.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/src/views/user/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/views/user/Register.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +83,7 @@
       <recent name="D:\repository\rita\view\src\assets" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.serve">
+  <component name="RunManager" selected="PHP Built-in Web Server.api-server">
     <configuration default="true" type="CompoundRunConfigurationType">
       <toRun name="serve" type="js.build_tools.npm" />
       <toRun name="api-server" type="PhpBuiltInWebServerConfigurationType" />
@@ -125,6 +127,7 @@
       <updated>1609769022078</updated>
       <workItem from="1609769026100" duration="2712000" />
       <workItem from="1609814245709" duration="19587000" />
+      <workItem from="1609982240921" duration="8270000" />
     </task>
     <task id="LOCAL-00001" summary="更新目录结构 尝试修复 eslint-plugin-vue 报错">
       <created>1609769478423</created>
@@ -154,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609771618441</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="添加登录/注册用户页面">
+      <created>1609927292086</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1609927292086</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,7 +177,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="更新目录结构 尝试修复 eslint-plugin-vue 报错" />
     <MESSAGE value="同步多端开发配置" />
-    <option name="LAST_COMMIT_MESSAGE" value="同步多端开发配置" />
+    <MESSAGE value="添加登录/注册用户页面" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加登录/注册用户页面" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -21,16 +21,23 @@ class AdminUser extends Model
     public function createUser(): array
     {
         $data = Request::post();
+        unset($data['check_pass'],$data['verify_code']);
         if(!$data['mobile']){
             return  restful(403,'手机号码不能为空');
         }
         //用户名称查重
-        $check = $this->where('mobile', $data['mobile'])->find();
-        if ($check) {
+        $check = $this->whereOr('mobile', $data['mobile'])
+            ->whereOr('username',$data['username'])
+            ->find();
+
+        if ($check['mobile'] === $data['mobile']) {
             return restful(403, '机号码已经注册，请登录');
         }
+        if($check['username'] === $data['username']){
+            return  restful(403,'用户名重复，换一个试试！');
+        }
         $data['openid'] = Uuid::getUuid();
-        $data['mobile'] = decrypt($data['mobile']);
+        $data['mobile'] = encrypt($data['mobile']);
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         $data['reg_ip'] = Request::ip();
         $data['last_time'] = time();
