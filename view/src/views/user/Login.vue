@@ -14,7 +14,7 @@
       <a-form-item>
         <a-input-password
             size="large"
-            placeholder="用户名/手机/邮箱">
+            placeholder="密码">
           <template #prefix>
             <LockOutlined/>
           </template>

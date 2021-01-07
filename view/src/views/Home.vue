@@ -1,6 +1,7 @@
 <template>
-  <div class="wrapper" :style="{paddingTop:'30px'}">
-
+  <div class="wrapper" :style="{padding:'30px'}">
+    <router-link to="/user/login"><a-button>登录</a-button></router-link>
+    <router-link to="/user/register" :style="{marginLeft:'12px'}"><a-button>注册</a-button></router-link>
   </div>
 </template>
 <script>

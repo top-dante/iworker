@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="766f0d11-f01a-4ccc-a347-f3710a321468" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/app/api/controller/Account.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app/api/model/AdminUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/api/model/AdminUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app/api/route/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/api/route/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/src/plugins/http.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/plugins/http.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/src/views/user/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/views/user/Register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/src/views/user/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/views/user/Login.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.3">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
     <include_path>
       <path value="$PROJECT_DIR$/app/vendor/league/flysystem" />
       <path value="$PROJECT_DIR$/app/vendor/psr/simple-cache" />
@@ -83,7 +80,7 @@
       <recent name="D:\repository\rita\view\src\assets" />
     </key>
   </component>
-  <component name="RunManager" selected="PHP Built-in Web Server.api-server">
+  <component name="RunManager" selected="Compound.dev">
     <configuration default="true" type="CompoundRunConfigurationType">
       <toRun name="serve" type="js.build_tools.npm" />
       <toRun name="api-server" type="PhpBuiltInWebServerConfigurationType" />
@@ -128,6 +125,7 @@
       <workItem from="1609769026100" duration="2712000" />
       <workItem from="1609814245709" duration="19587000" />
       <workItem from="1609982240921" duration="8270000" />
+      <workItem from="1610028332856" duration="939000" />
     </task>
     <task id="LOCAL-00001" summary="更新目录结构 尝试修复 eslint-plugin-vue 报错">
       <created>1609769478423</created>
