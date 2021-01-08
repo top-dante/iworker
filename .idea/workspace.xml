@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="766f0d11-f01a-4ccc-a347-f3710a321468" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/views/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/src/views/user/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/views/user/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,13 +20,14 @@
         <option value="tsconfig.json" />
         <option value="package.json" />
         <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.3">
     <include_path>
       <path value="$PROJECT_DIR$/app/vendor/league/flysystem" />
       <path value="$PROJECT_DIR$/app/vendor/psr/simple-cache" />
@@ -60,7 +58,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.data.extractors.current.export.id" value="JSON-Groovy.json.groovy" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/view/src/assets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/view/src/router" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -70,17 +68,17 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\repository\rita\view\src\router" />
       <recent name="D:\repository\rita\view\src\assets" />
       <recent name="D:\repository\rita\app" />
       <recent name="E:\rita\data" />
       <recent name="E:\rita\app" />
-      <recent name="E:\rita\release" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\repository\rita\view\src\assets" />
     </key>
   </component>
-  <component name="RunManager" selected="Compound.dev">
+  <component name="RunManager" selected="npm.serve">
     <configuration default="true" type="CompoundRunConfigurationType">
       <toRun name="serve" type="js.build_tools.npm" />
       <toRun name="api-server" type="PhpBuiltInWebServerConfigurationType" />
