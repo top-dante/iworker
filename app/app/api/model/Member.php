@@ -7,9 +7,9 @@ use think\facade\Request;
 use think\Model;
 use utils\Uuid;
 
-class AdminUser extends Model
+class Member extends Model
 {
-    protected $pk = 'openid';
+    protected $pk = 'uid';
 
     /**
      * 添加管理员
@@ -36,7 +36,7 @@ class AdminUser extends Model
         if($check['username'] === $data['username']){
             return  restful(403,'用户名重复，换一个试试！');
         }
-        $data['openid'] = Uuid::getUuid();
+        $data['uid'] = Uuid::getUuid();
         $data['mobile'] = encrypt($data['mobile']);
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         $data['reg_ip'] = Request::ip();
@@ -62,30 +62,33 @@ class AdminUser extends Model
     {
         $request = Request::post();
 
-        $user = $this->where('mobile', decrypt($request['mobile']))->find();
+        $user = $this->whereOr('mobile', $request['username'])
+            ->whereOr('username',$request['username'])
+            ->whereOr('email',$request['username'])
+            ->find();
         if (!$user) {
             return restful(404, '用户不存在或是已经被删除');
         }
         //校验密码
-        if (!$this->verifyPassword(decrypt($request['password']), $user['password'])) {
+        if (!$this->verifyPassword($request['password'], $user['password'])) {
             return restful(403, '密码错误，请检查重试');
         }
 
         //更新登录信息
         $stat = [
-            'user_id' => $user['user_id'],
+            'uid' => $user['uid'],
             'last_time' => time(),
             'last_ip' => \request()->ip()
         ];
         $this->update($stat);
         //组合返回信息
         $data = [
-            'user_id' => $user['user_id'],
+            'uid' => $user['uid'],
             'username' => $user['username'],
             'avatar' => $user['avatar'],
             'mobile' => $user['mobile'],
             'create_time' => time(),
-            'token' => encrypt($user['user_id'] . '.' . time())
+            'token' => encrypt($user['uid'] . '.' . time())
         ];
         return restful(200, '登录成功，欢迎回来！', $data);
 
