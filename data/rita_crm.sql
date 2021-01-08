@@ -2,44 +2,18 @@
 Navicat MariaDB Data Transfer
 
 Source Server         : localhost
-Source Server Version : 100312
+Source Server Version : 100508
 Source Host           : localhost:3306
 Source Database       : rita_crm
 
 Target Server Type    : MariaDB
-Target Server Version : 100312
+Target Server Version : 100508
 File Encoding         : 65001
 
-Date: 2021-01-07 18:03:25
+Date: 2021-01-08 23:24:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for rita_admin_user
--- ----------------------------
-DROP TABLE IF EXISTS `rita_admin_user`;
-CREATE TABLE `rita_admin_user` (
-  `openid` varchar(18) NOT NULL,
-  `username` varchar(50) DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `avatar` varchar(255) DEFAULT NULL,
-  `email` varchar(120) DEFAULT NULL,
-  `mobile` varchar(50) DEFAULT NULL,
-  `reg_ip` varchar(50) DEFAULT NULL,
-  `create_time` int(11) DEFAULT NULL,
-  `last_ip` varchar(50) DEFAULT NULL,
-  `last_time` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT 1,
-  PRIMARY KEY (`openid`),
-  KEY `username` (`username`,`email`,`mobile`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- ----------------------------
--- Records of rita_admin_user
--- ----------------------------
-INSERT INTO `rita_admin_user` VALUES ('0id5ff6788dcc745f1', 'admin1', '$2y$10$pySJeo0Wz5i5b4S0m8z/8Oh3FIQC.xwrc8Q0wkvijEA1JrRjH0szO', null, null, '62e0e0ode0dmqhe0e0kfod', '0.0.0.0', '1609988237', '0.0.0.0', '1609988237', '1');
-INSERT INTO `rita_admin_user` VALUES ('50e5ff678173a4eas8', 'admin', '$2y$10$FZEKIpRK/fIat2CDRXYjSe75GLmvt2wKPjGGB.uenfgDxc9lTEmTW', null, null, '62e0e0ode0dmqhe0e0kfod', '0.0.0.0', '1609988119', '0.0.0.0', '1609988119', '1');
 
 -- ----------------------------
 -- Table structure for rita_customer
@@ -132,6 +106,32 @@ CREATE TABLE `rita_group_member` (
 -- ----------------------------
 -- Records of rita_group_member
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for rita_member
+-- ----------------------------
+DROP TABLE IF EXISTS `rita_member`;
+CREATE TABLE `rita_member` (
+  `uid` varchar(18) NOT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `email` varchar(120) DEFAULT NULL,
+  `mobile` varchar(50) DEFAULT NULL,
+  `reg_ip` varchar(50) DEFAULT NULL,
+  `create_time` int(11) DEFAULT NULL,
+  `last_ip` varchar(50) DEFAULT NULL,
+  `last_time` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT 1,
+  PRIMARY KEY (`uid`),
+  KEY `username` (`username`,`email`,`mobile`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of rita_member
+-- ----------------------------
+INSERT INTO `rita_member` VALUES ('0id5ff6788dcc745f1', 'admin1', '$2y$10$pySJeo0Wz5i5b4S0m8z/8Oh3FIQC.xwrc8Q0wkvijEA1JrRjH0szO', null, null, '62e0e0ode0dmqhe0e0kfod', '0.0.0.0', '1609988237', '0.0.0.0', '1609988237', '1');
+INSERT INTO `rita_member` VALUES ('50e5ff678173a4eas8', 'admin', '$2y$10$FZEKIpRK/fIat2CDRXYjSe75GLmvt2wKPjGGB.uenfgDxc9lTEmTW', null, null, '62e0e0ode0dmqhe0e0kfod', '0.0.0.0', '1609988119', '::1', '1610118852', '1');
 
 -- ----------------------------
 -- Table structure for rita_product
