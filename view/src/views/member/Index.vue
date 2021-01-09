@@ -39,10 +39,7 @@
               borderTop: '1px solid #f0f0f0',
             }"
           >
-            <a-button type="dashed">
-              <template #icon><PlusOutlined /></template>
-              创建团队
-            </a-button>
+            <CreateTeam/>
             <a-button type="dashed" :style="{ marginLeft: '12px' }">
               <template #icon><PlusOutlined /></template>
               创建部门
@@ -75,6 +72,7 @@ import {
   SisternodeOutlined,
 } from "@ant-design/icons-vue";
 import CreateMember from "./components/CreateMember";
+import CreateTeam from "@/views/member/components/CreateTeam";
 export default {
   name: "Index",
   components: {
@@ -83,6 +81,7 @@ export default {
     TeamOutlined,
     SisternodeOutlined,
     CreateMember,
+    CreateTeam
   },
   data() {
     return {

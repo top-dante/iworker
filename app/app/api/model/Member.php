@@ -26,8 +26,9 @@ class Member extends Model
             return  restful(403,'手机号码不能为空');
         }
         //用户名称查重
-        $check = $this->whereOr('mobile', $data['mobile'])
+        $check = $this->whereOr('mobile', decrypt($data['username']))
             ->whereOr('username',$data['username'])
+            ->whereOr('email',$data['username'])
             ->find();
 
         if ($check['mobile'] === $data['mobile']) {
@@ -62,7 +63,7 @@ class Member extends Model
     {
         $request = Request::post();
 
-        $user = $this->whereOr('mobile', $request['username'])
+        $user = $this->whereOr('mobile', decrypt($request['username']))
             ->whereOr('username',$request['username'])
             ->whereOr('email',$request['username'])
             ->find();
