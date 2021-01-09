@@ -10,7 +10,7 @@ Target Server Type    : MariaDB
 Target Server Version : 100508
 File Encoding         : 65001
 
-Date: 2021-01-08 23:24:41
+Date: 2021-01-09 23:27:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,7 +34,7 @@ CREATE TABLE `rita_customer` (
 DROP TABLE IF EXISTS `rita_group`;
 CREATE TABLE `rita_group` (
   `group_id` varchar(18) NOT NULL,
-  `user_id` varchar(18) DEFAULT '',
+  `uid` varchar(18) NOT NULL DEFAULT '',
   `group_name` varchar(120) NOT NULL,
   `group_mobile` varchar(100) DEFAULT NULL,
   `group_address` varchar(255) DEFAULT NULL,
@@ -42,12 +42,14 @@ CREATE TABLE `rita_group` (
   `default` int(2) DEFAULT 0,
   `status` int(11) DEFAULT 1,
   PRIMARY KEY (`group_id`),
-  UNIQUE KEY `group_id` (`group_id`) USING HASH
+  UNIQUE KEY `group_id` (`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of rita_group
 -- ----------------------------
+INSERT INTO `rita_group` VALUES ('h0m5ff9c29c772e151', '50e5ff678173a4eas8', '普洱万维广告有限公司', null, null, '1610203804', '0', '1');
+INSERT INTO `rita_group` VALUES ('jms5ff9c1eb38c67xv', '50e5ff678173a4eas8', '普洱市简瑞科技有限公司', null, null, '1610203627', '0', '1');
 
 -- ----------------------------
 -- Table structure for rita_group_department
@@ -131,7 +133,7 @@ CREATE TABLE `rita_member` (
 -- Records of rita_member
 -- ----------------------------
 INSERT INTO `rita_member` VALUES ('0id5ff6788dcc745f1', 'admin1', '$2y$10$pySJeo0Wz5i5b4S0m8z/8Oh3FIQC.xwrc8Q0wkvijEA1JrRjH0szO', null, null, '62e0e0ode0dmqhe0e0kfod', '0.0.0.0', '1609988237', '0.0.0.0', '1609988237', '1');
-INSERT INTO `rita_member` VALUES ('50e5ff678173a4eas8', 'admin', '$2y$10$FZEKIpRK/fIat2CDRXYjSe75GLmvt2wKPjGGB.uenfgDxc9lTEmTW', null, null, '62e0e0ode0dmqhe0e0kfod', '0.0.0.0', '1609988119', '::1', '1610118852', '1');
+INSERT INTO `rita_member` VALUES ('50e5ff678173a4eas8', 'admin', '$2y$10$FZEKIpRK/fIat2CDRXYjSe75GLmvt2wKPjGGB.uenfgDxc9lTEmTW', null, null, '62e0e0ode0dmqhe0e0kfod', '0.0.0.0', '1609988119', '::1', '1610205283', '1');
 
 -- ----------------------------
 -- Table structure for rita_product
@@ -154,9 +156,9 @@ CREATE TABLE `rita_project` (
   `id` int(11) NOT NULL,
   `subject` varchar(120) DEFAULT NULL COMMENT '项目标题',
   `description` varchar(200) DEFAULT NULL COMMENT '项目描述',
-  `bm_id` int(11) DEFAULT NULL COMMENT '业务员',
-  `pm_id` int(11) DEFAULT NULL COMMENT '项目经理',
-  `user_id` int(11) DEFAULT NULL COMMENT '创建人',
+  `bm_id` varchar(18) DEFAULT '' COMMENT '业务员',
+  `pm_id` varchar(18) DEFAULT '' COMMENT '项目经理',
+  `uid` varchar(18) DEFAULT NULL COMMENT '创建人',
   `customer_id` int(11) DEFAULT NULL COMMENT '客户ID',
   `team` varchar(200) DEFAULT NULL COMMENT '参与团队',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',

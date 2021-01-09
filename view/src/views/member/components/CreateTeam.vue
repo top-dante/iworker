@@ -7,14 +7,18 @@
       <a-modal :visible="visible"
                title="创建团队"
                :width="400"
+               @ok="onSubmit"
                @cancel="visible=false">
-            <a-input placeholder="请输入团队名称"/>
+            <a-input placeholder="请输入团队名称" v-model:value="groupName"/>
       </a-modal>
     </span>
 </template>
 
 <script>
 import {PlusOutlined} from '@ant-design/icons-vue'
+import {apiPost} from "@/plugins/http";
+import {getUser,notice} from "@/plugins/utils";
+
 
 export default {
   name: "CreateTeam",
@@ -23,7 +27,27 @@ export default {
   },
   data() {
     return {
-      visible: false
+      visible: false,
+      groupName:''
+    }
+  },
+  methods:{
+    onSubmit(){
+      if(!this.groupName){
+        return notice(403,'团队名称不能为空');
+      }
+      let params = {
+        group_name:this.groupName,
+        uid:getUser().uid
+      }
+      apiPost('member/create_group',params)
+        .then((res)=>{
+          notice(res.code,res.msg)
+          if(res.code === 200){
+            this.visible = false
+            this.groupName = ''
+          }
+        })
     }
   }
 }

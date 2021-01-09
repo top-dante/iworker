@@ -6,7 +6,7 @@ namespace app\api\controller;
 
 use utils\Uuid;
 
-class Project {
+class Project extends Base{
 
     public function test_id(){
         $uuid = Uuid::getUuid();

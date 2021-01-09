@@ -4,7 +4,9 @@
 namespace app\api\controller;
 
 
-class Member
+use app\api\model\Group;
+
+class Member extends Base
 {
 
     public function create_member()
@@ -12,9 +14,13 @@ class Member
 
     }
 
-    public function create_group()
+    /**
+     * 添加团队
+     * @return array
+     */
+    public function create_group(): array
     {
-
+        return (new Group())->createGroup();
     }
 
     public function create_department()

@@ -13,15 +13,16 @@ const config = {
 }
 const instance  = axios.create(config);
 
-function getToken(){
-    return localStorage.getItem('token') || sessionStorage.getItem('token') || null
+export function getToken(){
+    return localStorage.getItem('token') ||
+        sessionStorage.getItem('token') || null
 }
 /**
  * 请求拦截
  */
 instance.interceptors.request.use(
     function(config) {
-        config.headers.common.token = getToken()
+        config.headers.common.Authorization = getToken()
       // Do something before request is sent
       return config;
     },

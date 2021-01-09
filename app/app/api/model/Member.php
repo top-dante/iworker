@@ -26,7 +26,7 @@ class Member extends Model
             return  restful(403,'手机号码不能为空');
         }
         //用户名称查重
-        $check = $this->whereOr('mobile', decrypt($data['username']))
+        $check = $this->whereOr('mobile', encrypt($data['username']))
             ->whereOr('username',$data['username'])
             ->whereOr('email',$data['username'])
             ->find();
@@ -63,7 +63,7 @@ class Member extends Model
     {
         $request = Request::post();
 
-        $user = $this->whereOr('mobile', decrypt($request['username']))
+        $user = $this->whereOr('mobile', encrypt($request['username']))
             ->whereOr('username',$request['username'])
             ->whereOr('email',$request['username'])
             ->find();
@@ -89,7 +89,7 @@ class Member extends Model
             'avatar' => $user['avatar'],
             'mobile' => $user['mobile'],
             'create_time' => time(),
-            'token' => encrypt($user['uid'] . '.' . time())
+            'token' => encrypt($user['uid'] .time()).'.'.$user['uid']
         ];
         return restful(200, '登录成功，欢迎回来！', $data);
 

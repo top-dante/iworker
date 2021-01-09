@@ -17,7 +17,6 @@ class Account
      */
     public function register(): \think\response\Json
     {
-        $adminUser = new Member();
         return json((new Member())->createUser());
     }
 
