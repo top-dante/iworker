@@ -1,13 +1,6 @@
 <template>
   <div class="top-right">
     <div class="item">
-      <a-tooltip title="新建">
-        <div class="line-full">
-          <span class="drop-plus"><PlusOutlined/></span>
-        </div>
-      </a-tooltip>
-    </div>
-    <div class="item">
       <a-dropdown :trigger="['click']"
                   :overlayStyle="{width: '280px'}"
                   placement="bottomCenter">
@@ -38,11 +31,26 @@
       </a-dropdown>
     </div>
     <div class="item">
+      <a-dropdown placement="bottomRight">
+        <div class="line-full">
+          {{currentGroup.group_name}}
+          <DownOutlined />
+        </div>
+        <template #overlay >
+          <a-menu  @click="onGroupItem">
+            <a-menu-item v-for="(item,index) in group" :key="index">
+              {{item.group_name}}
+            </a-menu-item>
+          </a-menu>
+        </template>
+      </a-dropdown>
+    </div>
+    <div class="item">
       <a-dropdown>
         <div class="line-full" :style="{verticalAlign:'middle'}">
           <a-avatar :size="28" :src="userInfo.avatar"/>
-          <span :style="{marginLeft:'8px'}">
-                    {{ userInfo.username }} ({{ userInfo.department }})
+          <span :style="{margin:'0 8px'}">
+                    {{ userInfo.username }}
                 </span>
           <span class="ellipsis"></span>
         </div>
@@ -82,33 +90,34 @@
 <script>
 import {
   BellOutlined,
-  PlusOutlined,
   HomeOutlined,
   SettingOutlined,
   MenuOutlined,
   ShareAltOutlined,
-  LogoutOutlined
+  LogoutOutlined,
+  DownOutlined
 } from '@ant-design/icons-vue'
 import {notification} from 'ant-design-vue'
+import { getUserInfo }from "@/api/user";
+import {getGroup,getGroupList} from "@/api/group";
+
 export default {
   name: "TopRight",
   components: {
     BellOutlined,
-    PlusOutlined,
     HomeOutlined,
     SettingOutlined,
     MenuOutlined,
     ShareAltOutlined,
-    LogoutOutlined
+    LogoutOutlined,
+    DownOutlined
   },
   data() {
     return {
       noticeList: [],
-      userInfo: {
-        username: '祁进',
-        department: '紫虚真人',
-        avatar: 'http://static.jworker.pe666.cn/assets/avatar.jpg'
-      }
+      userInfo:getUserInfo(),
+      group:getGroupList(),
+      currentGroup:getGroup()
     }
   },
   methods: {
@@ -123,6 +132,10 @@ export default {
           })
         }
       }
+    },
+    onGroupItem({key}){
+      this.currentGroup = this.group[key]
+      localStorage.setItem('current_group',JSON.stringify(this.currentGroup))
     },
     /**
      * 退出登录

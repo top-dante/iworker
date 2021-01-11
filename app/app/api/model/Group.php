@@ -14,8 +14,11 @@ class Group extends Model
     protected $pk = 'group_id';
 
     /**
-     * 添加团队
+     * 新建团队
      * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
      */
     public function createGroup(): array
     {
@@ -28,6 +31,7 @@ class Group extends Model
         if($checking){
             return restful(403,'团队名称已经存在，请换一个名称或是尝试加入团队');
         }
+
         $data = [
             'group_id'=> Uuid::getUuid(),
             'uid'=>$request['uid'],
@@ -41,4 +45,31 @@ class Group extends Model
             return restful(500, $exception->getMessage());
         }
     }
+
+    /**
+     * 查询全部团队列表
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getGroupList(): array
+    {
+        $data = $this->where('uid',request()->get('uid',''))
+            ->with(['department'=>function($query){
+                $query->select();
+            }])
+            ->select();
+        return restful(200,'ok',$data);
+    }
+
+    /**
+     * 关联预载入 部门
+     * @return \think\model\relation\HasMany
+     */
+    public function department(): \think\model\relation\HasMany
+    {
+        return $this->hasMany('GroupDepartment','group_id','group_id');
+    }
+
 }

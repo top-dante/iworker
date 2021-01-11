@@ -18,15 +18,13 @@
               @click="menuOnClick"
               v-model:openKeys="openKeys"
             >
-              <a-sub-menu v-for="item in team" :key="item.id">
-                <template #title>
-                  <a-avatar :src="item.avatar" class="border" />
-                  {{ item.name }}</template
-                >
-
-                <a-menu-item v-for="vo in item.children" :key="vo.id">
-                  <SisternodeOutlined /> {{ vo.title }}
+              <a-sub-menu v-for="item in team" :key="item.group_id">
+                <template #title>{{ item.group_name }}</template>
+                <template v-if="item.department">
+                <a-menu-item v-for="vo in item.department" :key="vo.depart_id">
+                  <SisternodeOutlined /> {{ vo.name }}
                 </a-menu-item>
+                </template>
               </a-sub-menu>
             </a-menu>
           </div>
@@ -40,10 +38,7 @@
             }"
           >
             <CreateTeam/>
-            <a-button type="dashed" :style="{ marginLeft: '12px' }">
-              <template #icon><PlusOutlined /></template>
-              创建部门
-            </a-button>
+            <CreateDepartment/>
           </div>
         </a-layout-sider>
 
@@ -67,17 +62,18 @@
 <script>
 import Header from "../../components/Header";
 import {
-  PlusOutlined,
   TeamOutlined,
   SisternodeOutlined,
 } from "@ant-design/icons-vue";
 import CreateMember from "./components/CreateMember";
 import CreateTeam from "@/views/member/components/CreateTeam";
+import {getGroupList} from "@/api/group";
+import CreateDepartment from "@/views/member/components/CreateDepartment";
 export default {
   name: "Index",
   components: {
+    CreateDepartment,
     Header,
-    PlusOutlined,
     TeamOutlined,
     SisternodeOutlined,
     CreateMember,
@@ -85,38 +81,14 @@ export default {
   },
   data() {
     return {
-      openKeys: [1],
-      team: [
-        {
-          id: 1,
-          name: "普洱市简瑞科技有限公司",
-          avatar: "http://static.jworker.pe666.cn/assets/brand/jr_logo.jpg",
-          children: [
-            { id: 1, title: "行政部" },
-            { id: 2, title: "设计部" },
-            { id: 3, title: "销售部" },
-            { id: 4, title: "工程部" },
-          ],
-        },
-        {
-          id: 2,
-          name: "普洱万维广告有限公司",
-          avatar: "http://static.jworker.pe666.cn/assets/brand/ww_logo.jpg",
-          children: [
-            { id: 5, title: "行政部" },
-            { id: 6, title: "设计部" },
-            { id: 8, title: "销售部" },
-            { id: 12, title: "工程部" },
-          ],
-        },
-      ],
+      openKeys: [0],
+      team: getGroupList()
     };
   },
-  created() {
-    this.getGroupList();
+  created(){
+    this.openKeys = [this.team[0].group_id]
   },
   methods: {
-    async getGroupList() {},
     menuOnClick({ item, key, keyPath }) {
       console.log({ item, key, keyPath });
     },

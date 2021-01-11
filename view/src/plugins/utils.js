@@ -17,20 +17,6 @@ export function notice(code, msg) {
             message.warn(msg)
     }
 }
-
-/**
- * 获取用户信息
- * @returns {null|any}
- */
-export function getUser(){
-    let user =  localStorage.getItem('user') || sessionStorage.getItem('user')
-    if(!user){
-        return null
-    }else {
-        return JSON.parse(user)
-    }
-}
-
 /**
  * 生成随机数
  * @param len

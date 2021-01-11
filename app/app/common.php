@@ -10,20 +10,12 @@
  */
 function restful($code = 200, $msg = 'success', $data = []): array
 {
-    if ($data) {
-        return [
-            'code' => $code,
-            'msg' => $msg,
-            'data' => $data,
-            'timestamp' => time()
-        ];
-    } else {
-        return [
-            'code' => $code,
-            'msg' => $msg,
-            'timestamp' => time()
-        ];
-    }
+    return [
+        'code' => $code,
+        'msg' => $msg,
+        'data' => $data,
+        'timestamp' => time()
+    ];
 }
 
 /**

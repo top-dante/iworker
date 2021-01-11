@@ -10,7 +10,7 @@ Target Server Type    : MariaDB
 Target Server Version : 100508
 File Encoding         : 65001
 
-Date: 2021-01-09 23:27:35
+Date: 2021-01-11 16:11:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -56,18 +56,20 @@ INSERT INTO `rita_group` VALUES ('jms5ff9c1eb38c67xv', '50e5ff678173a4eas8', '�
 -- ----------------------------
 DROP TABLE IF EXISTS `rita_group_department`;
 CREATE TABLE `rita_group_department` (
-  `depart_id` int(11) NOT NULL,
+  `depart_id` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) DEFAULT 0,
   `group_id` varchar(18) NOT NULL,
-  `user_id` varchar(18) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   `status` int(11) DEFAULT 1,
   PRIMARY KEY (`depart_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of rita_group_department
 -- ----------------------------
+INSERT INTO `rita_group_department` VALUES ('1', '0', 'jms5ff9c1eb38c67xv', '技术部', '1');
+INSERT INTO `rita_group_department` VALUES ('2', '0', 'h0m5ff9c29c772e151', '设计部', '1');
+INSERT INTO `rita_group_department` VALUES ('3', '0', 'h0m5ff9c29c772e151', '工程部', '1');
 
 -- ----------------------------
 -- Table structure for rita_group_map
@@ -133,7 +135,8 @@ CREATE TABLE `rita_member` (
 -- Records of rita_member
 -- ----------------------------
 INSERT INTO `rita_member` VALUES ('0id5ff6788dcc745f1', 'admin1', '$2y$10$pySJeo0Wz5i5b4S0m8z/8Oh3FIQC.xwrc8Q0wkvijEA1JrRjH0szO', null, null, '62e0e0ode0dmqhe0e0kfod', '0.0.0.0', '1609988237', '0.0.0.0', '1609988237', '1');
-INSERT INTO `rita_member` VALUES ('50e5ff678173a4eas8', 'admin', '$2y$10$FZEKIpRK/fIat2CDRXYjSe75GLmvt2wKPjGGB.uenfgDxc9lTEmTW', null, null, '62e0e0ode0dmqhe0e0kfod', '0.0.0.0', '1609988119', '::1', '1610205283', '1');
+INSERT INTO `rita_member` VALUES ('3145ffc0795247a8e7', 'admin5', '$2y$10$ubgNtnj60zHZQnTHJYnoD.RMLDX1ZU3td8PH667659GqQMuPLV76m', null, null, '62e0e0ode0dm0ce0e0kfkf', '::1', '1610352533', '::1', '1610352533', '1');
+INSERT INTO `rita_member` VALUES ('50e5ff678173a4eas8', 'admin', '$2y$10$FZEKIpRK/fIat2CDRXYjSe75GLmvt2wKPjGGB.uenfgDxc9lTEmTW', 'http://static.jworker.pe666.cn/assets/avatar.jpg', null, '62e0e0ode0dmqhe0e0kfod', '0.0.0.0', '1609988119', '::1', '1610352543', '1');
 
 -- ----------------------------
 -- Table structure for rita_product

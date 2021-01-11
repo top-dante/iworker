@@ -59,7 +59,7 @@
 
 <script>
 import { PlusOutlined, CheckOutlined } from "@ant-design/icons-vue";
-import { apiPost } from "@/plugins/http";
+import { apiPost } from "@/plugins/axios";
 import moment from "moment";
 
 export default {

@@ -96,7 +96,8 @@ import {
   MobileOutlined,
   VerifiedOutlined
 } from '@ant-design/icons-vue'
-import {apiPost} from "@/plugins/http";
+
+import {register} from "@/api/user";
 
 export default {
   name: "Register",
@@ -164,18 +165,7 @@ export default {
   methods: {
     handleFinish(value) {
       this.loading = true
-      apiPost('account/register', value)
-          .then((res) => {
-            if(res.code === 200){
-              this.$message.success(res.msg)
-              setTimeout(()=>{
-                this.router.push('/user/login')
-              },3000)
-            }
-          })
-          .catch((err) => {
-            this.$message.error(err)
-          })
+      register(value)
       setTimeout(() => {
         this.loading = false
       }, 5000)

@@ -75,7 +75,8 @@ import {
   QqOutlined,
   DingdingOutlined
 } from '@ant-design/icons-vue'
-import {apiPost} from "@/plugins/http";
+
+import {login} from "@/api/user";
 
 export default {
   name: "Login",
@@ -103,33 +104,10 @@ export default {
   methods:{
     onLogin(values){
       this.loading = true
-      apiPost('account/login',values)
-          .then((res)=>{
-            if(res.code === 200){
-              this.$message.success(res.msg)
-              if(this.remember){
-                localStorage.setItem('token',res.data.token)
-                localStorage.setItem('user',JSON.stringify(res.data))
-              }else {
-                sessionStorage.setItem('token',res.data.token)
-                sessionStorage.setItem('user',JSON.stringify(res.data))
-              }
-              this.toHome()
-            }else {
-              this.$message.warn(res.msg)
-            }
-          })
-          .catch((err)=>{
-            this.$message.error(err)
-          })
+      login(values,this.remember)
       setTimeout(()=>{
         this.loading = false
       },5000)
-    },
-    toHome(){
-      setTimeout(()=>{
-        this.$router.push({path:'/'})
-      },3000)
     }
   }
 }

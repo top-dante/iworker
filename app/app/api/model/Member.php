@@ -22,6 +22,7 @@ class Member extends Model
     {
         $data = Request::post();
         unset($data['check_pass'],$data['verify_code']);
+
         if(!$data['mobile']){
             return  restful(403,'手机号码不能为空');
         }
@@ -30,12 +31,13 @@ class Member extends Model
             ->whereOr('username',$data['username'])
             ->whereOr('email',$data['username'])
             ->find();
-
-        if ($check['mobile'] === $data['mobile']) {
-            return restful(403, '机号码已经注册，请登录');
-        }
-        if($check['username'] === $data['username']){
-            return  restful(403,'用户名重复，换一个试试！');
+        if($check){
+            if ($check['mobile'] === encrypt($data['mobile'])) {
+                return restful(403, '机号码已经注册，请登录');
+            }
+            if($check['username'] === $data['username']){
+                return  restful(403,'用户名重复，换一个试试！');
+            }
         }
         $data['uid'] = Uuid::getUuid();
         $data['mobile'] = encrypt($data['mobile']);

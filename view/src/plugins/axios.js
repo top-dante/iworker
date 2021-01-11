@@ -1,4 +1,5 @@
 import axios from 'axios'
+// import {notice} from "@/plugins/utils";
 
 const baseURL = {
     dev:'http://localhost/api/',
@@ -13,7 +14,7 @@ const config = {
 }
 const instance  = axios.create(config);
 
-export function getToken(){
+function getToken(){
     return localStorage.getItem('token') ||
         sessionStorage.getItem('token') || null
 }
@@ -40,32 +41,34 @@ instance.interceptors.response.use(
       return response.data;
     },
     function(error) {
+       // notice(500,error.message)
       return Promise.reject(error);
     }
   );
 
-export function apiGet(url, params = {}){
-    return new Promise((resolve,reject)=>{
-        instance.get(url,{
-            params:params
+export default {
+    get:(url, params = {})=>{
+        return new Promise((resolve,reject)=>{
+            instance.get(url,{
+                params:params
+            })
+                .then((response)=>{
+                    resolve(response)
+                })
+                .catch((err)=>{
+                    reject(err)
+                })
         })
-        .then((response)=>{
-            resolve(response)
+    },
+    post:(url,data)=> {
+        return new Promise((resolve, reject) => {
+            instance.post(url, data)
+                .then((response) => {
+                    return resolve(response)
+                })
+                .catch((err) => {
+                    reject(err)
+                })
         })
-        .catch((err)=>{
-            reject(err)
-        })
-    })
+    }
 }
-export function apiPost(url,data){
-    return new Promise((resolve,reject)=>{
-        instance.post(url,data)
-        .then((response)=>{
-            return resolve(response)
-        })
-        .catch((err)=>{
-            reject(err)
-        })
-    })
-}
-
