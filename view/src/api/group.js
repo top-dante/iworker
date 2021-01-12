@@ -16,6 +16,11 @@ export function getGroup()
         return []
     }
 }
+
+/**
+ * 获取groupId
+ * @returns {string|[{message: string, required}]|*}
+ */
 export function getGroupId(){
     return getGroup().group_id
 }
