@@ -10,7 +10,7 @@ Target Server Type    : MariaDB
 Target Server Version : 100508
 File Encoding         : 65001
 
-Date: 2021-01-11 16:11:36
+Date: 2021-01-12 17:06:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -136,7 +136,7 @@ CREATE TABLE `rita_member` (
 -- ----------------------------
 INSERT INTO `rita_member` VALUES ('0id5ff6788dcc745f1', 'admin1', '$2y$10$pySJeo0Wz5i5b4S0m8z/8Oh3FIQC.xwrc8Q0wkvijEA1JrRjH0szO', null, null, '62e0e0ode0dmqhe0e0kfod', '0.0.0.0', '1609988237', '0.0.0.0', '1609988237', '1');
 INSERT INTO `rita_member` VALUES ('3145ffc0795247a8e7', 'admin5', '$2y$10$ubgNtnj60zHZQnTHJYnoD.RMLDX1ZU3td8PH667659GqQMuPLV76m', null, null, '62e0e0ode0dm0ce0e0kfkf', '::1', '1610352533', '::1', '1610352533', '1');
-INSERT INTO `rita_member` VALUES ('50e5ff678173a4eas8', 'admin', '$2y$10$FZEKIpRK/fIat2CDRXYjSe75GLmvt2wKPjGGB.uenfgDxc9lTEmTW', 'http://static.jworker.pe666.cn/assets/avatar.jpg', null, '62e0e0ode0dmqhe0e0kfod', '0.0.0.0', '1609988119', '::1', '1610352543', '1');
+INSERT INTO `rita_member` VALUES ('50e5ff678173a4eas8', 'admin', '$2y$10$FZEKIpRK/fIat2CDRXYjSe75GLmvt2wKPjGGB.uenfgDxc9lTEmTW', 'http://static.jworker.pe666.cn/assets/avatar.jpg', null, '62e0e0ode0dmqhe0e0kfod', '0.0.0.0', '1609988119', '::1', '1610419261', '1');
 
 -- ----------------------------
 -- Table structure for rita_product

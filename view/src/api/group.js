@@ -1,4 +1,6 @@
 import axios from "@/plugins/axios";
+import {getUserId} from "@/api/user";
+import {notice} from "@/plugins/utils";
 
 
 /**
@@ -23,7 +25,7 @@ export function getGroup()
 export function getGroupList(reload) {
     let group = localStorage.getItem('group')
     if (reload || !group) {
-        axios.get('/member/get_group_list', {uid: this.getUid()})
+        axios.get('member/get_group_list', {uid: getUserId()})
             .then((res) => {
                 group = res.data
                 localStorage.setItem('group', JSON.stringify(res.data))
@@ -33,4 +35,25 @@ export function getGroupList(reload) {
     } else {
         return JSON.parse(group)
     }
+}
+
+/**
+ * 根据groupId获取部门列表
+ * @param reload
+ * @returns {string|any}
+ */
+export function getDepartmentList(reload){
+    let department = localStorage.getItem('department')
+    if(reload || !department){
+        let group = getGroup();
+        axios.get('member/get_department_list',{group_id:group.group_id})
+            .then((r)=>{
+                department = r.data
+                localStorage.setItem('department',JSON.stringify(r.data))
+            }).catch((e)=>{
+                notice(500,e.message)
+        })
+        return department;
+    }
+    return JSON.parse(department)
 }

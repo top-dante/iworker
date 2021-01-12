@@ -55,13 +55,10 @@ class Group extends Model
      */
     public function getGroupList(): array
     {
-        $data = $this->where('uid',request()->get('uid',''))
-            ->with(['department'=>function($query){
-                $query->select();
-            }])
-            ->select();
+        $data = $this->where('uid',request()->get('uid',''))->select();
         return restful(200,'ok',$data);
     }
+
 
     /**
      * 关联预载入 部门

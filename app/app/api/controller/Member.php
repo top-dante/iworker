@@ -43,4 +43,8 @@ class Member extends Base
     {
         return (new GroupDepartment())->createDepartment();
     }
+    public function get_department_list(): array
+    {
+        return (new GroupDepartment())->getDepartmentList();
+    }
 }

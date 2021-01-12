@@ -33,13 +33,23 @@
     <div class="item">
       <a-dropdown placement="bottomRight">
         <div class="line-full">
-          {{currentGroup.group_name}}
-          <DownOutlined />
+          {{ currentGroup.group_name }}
+          <DownOutlined/>
         </div>
-        <template #overlay >
-          <a-menu  @click="onGroupItem">
-            <a-menu-item v-for="(item,index) in group" :key="index">
-              {{item.group_name}}
+        <template #overlay>
+          <a-menu @click="onGroupItem">
+            <template v-if="group.length>0">
+              <a-menu-item v-for="(item,index) in group" :key="index">
+                {{ item.group_name }}
+              </a-menu-item>
+            </template>
+            <template v-else>
+              <div class="padding text-sm text-gray">暂无团队，请新建</div>
+            </template>
+            <a-menu-divider/>
+            <a-menu-item class="text-center" key="create">
+              <PlusOutlined/>
+              创建团队
             </a-menu-item>
           </a-menu>
         </template>
@@ -95,11 +105,12 @@ import {
   MenuOutlined,
   ShareAltOutlined,
   LogoutOutlined,
-  DownOutlined
+  DownOutlined,
+  PlusOutlined
 } from '@ant-design/icons-vue'
 import {notification} from 'ant-design-vue'
-import { getUserInfo }from "@/api/user";
-import {getGroup,getGroupList} from "@/api/group";
+import {getUserInfo} from "@/api/user";
+import {getGroup, getGroupList} from "@/api/group";
 
 export default {
   name: "TopRight",
@@ -110,15 +121,19 @@ export default {
     MenuOutlined,
     ShareAltOutlined,
     LogoutOutlined,
-    DownOutlined
+    DownOutlined,
+    PlusOutlined
   },
   data() {
     return {
       noticeList: [],
-      userInfo:getUserInfo(),
-      group:getGroupList(),
-      currentGroup:getGroup()
+      userInfo: getUserInfo(),
+      group: [],
+      currentGroup: getGroup()
     }
+  },
+  created() {
+    this.group = getGroupList();
   },
   methods: {
     //获取消息列表
@@ -133,9 +148,12 @@ export default {
         }
       }
     },
-    onGroupItem({key}){
+    onGroupItem({key}) {
+      if (key === 'none' || key === 'create') {
+        return false;
+      }
       this.currentGroup = this.group[key]
-      localStorage.setItem('current_group',JSON.stringify(this.currentGroup))
+      localStorage.setItem('current_group', JSON.stringify(this.currentGroup))
     },
     /**
      * 退出登录
@@ -144,17 +162,17 @@ export default {
       try {
         this.clearUserData()
         notification.success({
-          message:'您已安全退出登录!',
-          description:'已将您的登录信息清除，正在为您跳转登录页面！'
+          message: '您已安全退出登录!',
+          description: '已将您的登录信息清除，正在为您跳转登录页面！'
         })
-        setTimeout(()=>{
+        setTimeout(() => {
           this.$router.push('/user/login')
-        },3000)
-      }catch (e) {
+        }, 3000)
+      } catch (e) {
         console.log(e)
       }
     },
-    clearUserData(){
+    clearUserData() {
       sessionStorage.removeItem('token')
       localStorage.removeItem('token')
       sessionStorage.removeItem('user')
@@ -217,5 +235,15 @@ export default {
 >>> .footer.ant-dropdown-menu-item:hover {
   background-color: #fff;
   color: #1890ff;
+}
+
+.dropdown-menu-title {
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 4px;
+}
+
+.dropdown-menu-title:hover {
+  background-color: #fff;
+  cursor: default;
 }
 </style>

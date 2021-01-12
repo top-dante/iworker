@@ -49,3 +49,29 @@ function verifyCrypt($string, $token): bool
 {
     return \utils\SignatureHelper::verify($string,$token);
 }
+
+/**
+ * 获取遍历树
+ * @param $list
+ * @param string $pk
+ * @param string $pid
+ * @param string $child
+ * @param int $root
+ * @return array
+ */
+function getTree($list, $pk = 'id', $pid = 'pid',$child = 'children', $root = 0): array
+{
+    $tree = $packData = [];
+    foreach ($list as $data) {
+        $packData[$data[$pk]] = $data;
+    }
+    foreach ($packData as $key =>$val) {
+        if ($val[$pid] == $root) {//代表跟节点
+            $tree[] = & $packData[$key];
+        } else {
+            //找到其父类
+            $packData[$val[$pid]][$child][] = & $packData[$key];
+        }
+    }
+    return $tree;
+}

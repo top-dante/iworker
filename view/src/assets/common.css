@@ -1,4 +1,64 @@
 
+::-webkit-scrollbar{width: 6px; height: 6px; padding-top: 8px; background-color: transparent;}
+::-webkit-scrollbar-thumb{background-color: rgba(0, 0, 0, .35);}
+.ant-btn {padding: 0 12px;}
+.ant-btn-sm {font-size: 12px;}
+.ant-card{border-radius: 4px;}
+/*custom style*/
+.padding-0{padding: 0 !important;}
+.padding{padding: 20px;}
+.padding-md{padding: 16px;}
+.padding-sm{padding: 10px;}
+.padding-x{padding: 0 20px;}
+.mt-large{margin-top: 32px !important;}
+.mt{margin-top: 20px}
+.mt-sm{margin-top: 10px}
+.mt-xs{margin-top: 6px}
+.mb{margin-bottom: 20px}
+.mb-sm{margin-bottom: 10px}
+.mb-xs{margin-bottom: 6px}
+.mb-0{margin-bottom: 0!important;}
+.mr{margin-right: 20px;}
+.mr-md{margin-right: 16px;}
+.mr-sm{margin-right: 10px;}
+.mr-xs{margin-right: 8px;}
+.ml{margin-left: 20px;}
+.ml-sm{margin-left: 10px;}
+.ml-xs{margin-left: 6px;}
+.pt{padding-top: 20px !important;}
+.pb{padding-bottom: 20px !important;}
+.pb-sm{padding-bottom: 10px !important;}
+.pl{padding-left: 20px !important;}
+.pl-sm{padding-left: 10px !important;}
+.text-price:before{content: "￥";}
+.text-gray{color: rgba(0, 0, 0, .45)}
+.text-danger{color: #ff4d4f}
+.text-center{text-align: center}
+.text-right{text-align: right}
+.text-xxxl{font-size: 24px !important;}
+.text-xxl{font-size: 20px !important;}
+.text-xl{font-size: 18px !important;}
+.text-lg{font-size: 16px !important;}
+.text-default{font-size: 14px !important;}
+.text-sm{font-size: 10px !important;}
+.border-circle{border-radius: 1000px !important;}
+.border-radius{border-radius: 4px}
+.border-none{border: none !important;}
+.border-none:hover,
+.border-none:focus{border: none !important; box-shadow: none !important;}
+.border-bottom{border-bottom: 1px solid #e8e8e8}
+.float-right{float: right;}
+.float-right:after,
+.float-right:before{clear: both; content: ""; float: none; display: table;}
+.width-md{width: 300px !important}
+.width-sm{width: 200px !important}
+.width-xs{width: 100px !important}
+.font-weight-lg{font-weight: 700}
+.font-weight-md{font-weight: 600}
+.font-weight{font-weight: 400}
+.font-weight-sm{font-weight: 300}
+.link{color: #1890ff;cursor: pointer}
+.cursor-pointer:hover{cursor: pointer;transition: all ease-in-out .5s;}
 .wrapper {
 
 }
@@ -70,7 +130,4 @@
     border-radius: 50%;
     background-color: rgba(0,0,0,.45);
     margin-right: 3px;
-}
-.ml{
-    margin-left: 10px;
 }
