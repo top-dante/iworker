@@ -1,11 +1,10 @@
 <template>
 <span>
- <a-button type="dashed"
-           @click="visible = true"
-           :style="{ marginLeft: '12px' }">
-   <template #icon><PlusOutlined/></template>
-   创建部门
- </a-button>
+  <a-button type="link"
+            @click="visible = true"
+            class="float-right">
+    <template #icon><PlusCircleOutlined /></template>添加部门
+  </a-button>
   <a-modal
       @cancel="visible = false"
       :width="320"
@@ -22,9 +21,13 @@
         </a-form-item>
         <a-form-item name="group_id">
          <a-select placeholder="请选择所属团队"
-                   v-model:value="form.group_id">
-            <a-select-option :value="item.group_id" v-for="item in groupList" :key="item.group_id">
-              {{item.group_name}}
+                   v-model:value="form.pid">
+           <a-select-option :value="0">一级部门</a-select-option>
+            <a-select-option
+                :value="item.depart_id"
+                v-for="item in department"
+                :key="item.depart_id">
+              {{item.name}}
             </a-select-option>
           </a-select>
         </a-form-item>
@@ -38,29 +41,32 @@
 </template>
 
 <script>
-import {PlusOutlined} from '@ant-design/icons-vue'
-import {getGroupList} from "@/api/group";
+import {PlusCircleOutlined} from '@ant-design/icons-vue'
+import {getDepartmentList,getGroupId} from "@/api/group";
 import axios from "@/plugins/axios";
 import {notice} from "@/plugins/utils";
 
 export default {
   name: "CreateDepartment",
   components: {
-    PlusOutlined
+    PlusCircleOutlined
   },
   data() {
     return {
       visible: false,
-      groupList:getGroupList(),
-      form:{name:'', group_id:''},
+      department:[],
+      form:{name:'', pid:0,group_id:getGroupId()},
       rules:{
         name:[
             {required:true,message:'部门名称不能为空'},
             {max:20,message: '部门名称不能超过20个字符'}
            ],
-        group_id: [{required:true,message:'请选择所属团队'}]
+        pid: [{required:true,message:'请选择上级部门'}]
       }
     }
+  },
+  created(){
+    this.department = getDepartmentList()
   },
   methods:{
     onSubmit(data){
@@ -70,7 +76,7 @@ export default {
         if(res.code === 200){
           this.visible =false
           setTimeout(()=>{
-            getGroupList(true)
+            getDepartmentList(true)
           },1000)
         }
       })

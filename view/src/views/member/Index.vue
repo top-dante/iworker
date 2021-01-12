@@ -13,7 +13,10 @@
           </div>
           <!--                    team-->
           <div class="team">
-            <div class="title">部门管理</div>
+            <div class="title">
+              部门管理
+              <CreateDepartment/>
+            </div>
             <a-menu
               mode="inline"
               @click="menuOnClick"
@@ -44,7 +47,6 @@
               borderTop: '1px solid #f0f0f0',
             }"
           >
-            <CreateDepartment/>
           </div>
         </a-layout-sider>
 
@@ -106,7 +108,7 @@ export default {
   min-height: 420px;
 }
 .team .title {
-  padding:0 24px;
+  padding:4px 24px;
   color: rgba(0,0,0,.45);
 }
 .team-item {

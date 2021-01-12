@@ -16,6 +16,9 @@ export function getGroup()
         return []
     }
 }
+export function getGroupId(){
+    return getGroup().group_id
+}
 
 /**
  * 获取团队信息 写入 localStorage 缓存
