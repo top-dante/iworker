@@ -2,7 +2,7 @@
   <a-layout :style="{minHeight:'100vh'}">
     <a-layout-header class="header">
       <div class="brand">
-        <img src="./../../assets/brand.png" class="logo" width="30" alt="">
+        <img src="./../../assets/brand/brand_blue.svg" class="logo" width="30" alt="">
         <span class="title">RitaCRM</span>
         <span class="desc">简单工作，快乐生活！</span>
       </div>

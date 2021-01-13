@@ -1,10 +1,8 @@
 <template>
 <span>
-  <a-button type="link"
-            @click="visible = true"
-            class="float-right">
-    <template #icon><PlusCircleOutlined /></template>添加部门
-  </a-button>
+  <span @click="visible = true" class="link float-right">
+    <PlusCircleOutlined /> 添加部门
+  </span>
   <a-modal
       @cancel="visible = false"
       :width="320"
@@ -19,7 +17,7 @@
         <a-form-item name="name">
           <a-input v-model:value="form.name" placeholder="请输入部门名称"/>
         </a-form-item>
-        <a-form-item name="group_id">
+        <a-form-item name="pid">
          <a-select placeholder="请选择所属团队"
                    v-model:value="form.pid">
            <a-select-option :value="0">一级部门</a-select-option>
@@ -48,6 +46,7 @@ import {notice} from "@/plugins/utils";
 
 export default {
   name: "CreateDepartment",
+  props:['callback'],
   components: {
     PlusCircleOutlined
   },
@@ -70,10 +69,12 @@ export default {
   },
   methods:{
     onSubmit(data){
+      data.group_id = getGroupId()
       axios.post('member/create_department',data)
       .then((res)=>{
         notice(res.code,res.msg)
         if(res.code === 200){
+          this.callback()
           this.visible =false
           setTimeout(()=>{
             getDepartmentList(true)

@@ -131,3 +131,9 @@
     background-color: rgba(0,0,0,.45);
     margin-right: 3px;
 }
+.ellipsis:hover,
+.ellipsis:hover:before,
+.ellipsis:hover:after{
+    background-color: #1890ff;
+    transition-duration: .4s;
+}

@@ -20,7 +20,8 @@ class GroupDepartment extends Model
         $request = request()->post();
         $data=[
             'name'=>$request['name'],
-            'group_id'=>$request['group_id']
+            'group_id'=>$request['group_id'],
+            'pid'=>$request['pid']
         ];
         try {
             $this->save($data);

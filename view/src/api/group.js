@@ -52,16 +52,16 @@ export function getGroupList(reload) {
  */
 export function getDepartmentList(reload){
     let department = localStorage.getItem('department')
-    if(reload || !department){
+    if(reload){
         let group = getGroup();
         axios.get('member/get_department_list',{group_id:group.group_id})
             .then((r)=>{
-                department = r.data
                 localStorage.setItem('department',JSON.stringify(r.data))
+               department = r.data
             }).catch((e)=>{
                 notice(500,e.message)
         })
-        return department;
+        return department ? JSON.parse(department) : [];
     }
     return JSON.parse(department)
 }
