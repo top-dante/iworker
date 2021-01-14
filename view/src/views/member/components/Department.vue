@@ -9,7 +9,9 @@
       <template v-for="item in department">
         <template v-if="item.children">
           <a-sub-menu :key="item.id" :title="item.name">
-            <a-menu-item v-for="vo in item.children" :key="vo.depart_id">
+            <a-menu-item v-for="vo in item.children"
+                         @click="delDepartment(vo)"
+                         :key="vo.depart_id">
               <BulbOutlined />{{vo.name}}
             </a-menu-item>
           </a-sub-menu>
@@ -23,7 +25,9 @@
               <template #overlay>
                 <a-menu>
                   <a-menu-item>编辑</a-menu-item>
-                  <a-menu-item>删除</a-menu-item>
+                  <a-menu-item @click="delDepartment(item)">
+                      删除
+                   </a-menu-item>
                 </a-menu>
               </template>
             </a-dropdown>
@@ -31,6 +35,9 @@
         </template>
       </template>
     </a-menu>
+    <a-popconfirm title="您将删除此部门，请谨慎操作！" @confirm="confirm" @cancel="cancel">
+      <a href="#">Delete</a>
+    </a-popconfirm>
   </div>
 </template>
 
@@ -59,7 +66,25 @@ export default {
     },
     callback(){
       this.department = getDepartmentList(true)
-    }
+    },
+    delDepartment(item){
+      console.log(item)
+      this.$confirm({
+        title: '部门删除确认',
+        content:'您将删除-['+item.name+']-部门，此操作不可逆，请谨慎操作！',
+        okText:'确认',
+        okType:'danger',
+        cancelText:'取消',
+        onOk() {
+          console.log('OK');
+        },
+        onCancel() {
+          console.log('Cancel');
+        },
+      });
+    },
+    confirm(){},
+    cancel(){}
   }
 }
 </script>

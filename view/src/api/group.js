@@ -65,3 +65,10 @@ export function getDepartmentList(reload){
     }
     return JSON.parse(department)
 }
+export function delDepartment(id){
+    axios.get('member/del_department',{
+        depart_id:id
+    }).then((res)=>{
+        console.log(res)
+    })
+}
