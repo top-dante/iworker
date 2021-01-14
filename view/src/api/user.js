@@ -1,4 +1,4 @@
-import axios from "@/plugins/axios";
+import {request} from "@/plugins/request";
 import {notice} from "@/plugins/utils";
 import router from "@/router";
 
@@ -9,16 +9,18 @@ import router from "@/router";
  * @param remember
  */
 export function login(data,remember){
-    axios.post('account/login',data)
+    request.post('account/login',data)
         .then((r)=>{
             notice(r.code,r.msg)
             if(r.code === 200){
                 if(remember){
                     localStorage.setItem('token',r.data.token)
                     localStorage.setItem('user',JSON.stringify(r.data))
+                    localStorage.setItem('uid',r.data.uid)
                 }else {
                     sessionStorage.setItem('token',r.data.token)
                     sessionStorage.setItem('user',JSON.stringify(r.data))
+                    sessionStorage.setItem('uid',r.data.uid)
                 }
                 setTimeout(()=>{
                     router.push('/')
@@ -33,7 +35,7 @@ export function login(data,remember){
  * 用户注册
  */
 export function register(data){
-    axios.post('account/register',data)
+    request.post('account/register',data)
         .then((res)=>{
             notice(res.code,res.msg)
             if(res.code === 200){

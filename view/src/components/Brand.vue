@@ -23,12 +23,12 @@
       overflow: hidden;
     }
     .brand .logo {
-      width: 36px;
+      width: 32px;
       vertical-align: -6px;
     }
     .title {
       color: rgba(255,255,255,.85);
-      font-size: 28px;
+      font-size: 24px;
     }
     .tag {
       display: inline-block;

@@ -1,5 +1,4 @@
-import axios from "@/plugins/axios";
-import {getUserId} from "@/api/user";
+import {request} from "@/plugins/request";
 import {notice} from "@/plugins/utils";
 
 
@@ -7,8 +6,7 @@ import {notice} from "@/plugins/utils";
  * 获取当前团队信息
  * @returns {*[]|any}
  */
-export function getGroup()
-{
+export function getGroup() {
     let group = localStorage.getItem('current_group')
     if (group) {
         return JSON.parse(group)
@@ -21,54 +19,35 @@ export function getGroup()
  * 获取groupId
  * @returns {string|[{message: string, required}]|*}
  */
-export function getGroupId(){
+export function getGroupId() {
     return getGroup().group_id
 }
 
 /**
- * 获取团队信息 写入 localStorage 缓存
- * @param reload 刷新 true 默认false
+ * 获取团队信息
  * @returns {string|any}
  */
-export function getGroupList(reload) {
-    let group = localStorage.getItem('group')
-    if (reload || !group) {
-        axios.get('member/get_group_list', {uid: getUserId()})
-            .then((res) => {
-                group = res.data
-                localStorage.setItem('group', JSON.stringify(res.data))
-                localStorage.setItem('current_group', JSON.stringify(res.data[0]))
-            })
-        return group;
-    } else {
-        return JSON.parse(group)
-    }
+export function getGroupList() {
+   return request.get('member/get_group_list', {uid: request.uid()})
 }
 
 /**
  * 根据groupId获取部门列表
- * @param reload
  * @returns {string|any}
  */
-export function getDepartmentList(reload){
-    let department = localStorage.getItem('department')
-    if(reload){
-        let group = getGroup();
-        axios.get('member/get_department_list',{group_id:group.group_id})
-            .then((r)=>{
-                localStorage.setItem('department',JSON.stringify(r.data))
-               department = r.data
-            }).catch((e)=>{
-                notice(500,e.message)
+export function getDepartmentList() {
+    return request.get('member/get_department_list', {group_id: request.groupId()})
+        .then((r) => {
+            return r.data
+        }).catch((e) => {
+            notice(500, e.message)
         })
-        return department ? JSON.parse(department) : [];
-    }
-    return JSON.parse(department)
 }
-export function delDepartment(id){
-    axios.get('member/del_department',{
-        depart_id:id
-    }).then((res)=>{
+
+export function delDepartment(id) {
+    request.get('member/del_department', {
+        depart_id: id
+    }).then((res) => {
         console.log(res)
     })
 }

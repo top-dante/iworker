@@ -43,8 +43,9 @@
 
 <script>
 import {BulbOutlined} from '@ant-design/icons-vue'
-import {getDepartmentList} from "@/api/group";
 import CreateDepartment from "@/views/member/components/CreateDepartment";
+import {getGroupId} from '@/api/group'
+import {request} from "@/plugins/request";
 
 export default {
   name: "Department",
@@ -58,14 +59,18 @@ export default {
     }
   },
   created(){
-    this.department = getDepartmentList()
+    this.department = this.getDepartmentList()
   },
   methods: {
     menuOnClick({ item, key, keyPath }) {
       console.log({ item, key, keyPath });
     },
+    getDepartmentList(){
+      let groupId = getGroupId()
+      request.get('member/get_department_list',{group_id:groupId})
+    },
     callback(){
-      this.department = getDepartmentList(true)
+      this.department = this.getDepartmentList(true)
     },
     delDepartment(item){
       console.log(item)

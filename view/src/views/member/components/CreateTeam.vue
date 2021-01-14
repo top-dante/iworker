@@ -16,7 +16,7 @@
 
 <script>
 import {PlusOutlined} from '@ant-design/icons-vue'
-import axios from "@/plugins/axios";
+import {request} from "@/plugins/request";
 import {notice} from "@/plugins/utils";
 import  {getUserId} from '@/api/user'
 
@@ -41,7 +41,7 @@ export default {
         group_name:this.groupName,
         uid:getUserId()
       }
-      axios.post('member/create_group',params)
+      request.post('member/create_group',params)
         .then((res)=>{
           notice(res.code,res.msg)
           if(res.code === 200){

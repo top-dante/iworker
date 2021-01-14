@@ -110,7 +110,7 @@ import {
 } from '@ant-design/icons-vue'
 import {notification} from 'ant-design-vue'
 import {getUserInfo} from "@/api/user";
-import {getGroup, getGroupList} from "@/api/group";
+import {getGroupList} from "@/api/group";
 
 export default {
   name: "TopRight",
@@ -127,13 +127,15 @@ export default {
   data() {
     return {
       noticeList: [],
+      group:[],
       userInfo: getUserInfo(),
-      group: [],
-      currentGroup: getGroup()
+      currentGroup: []
     }
   },
   created() {
-    this.group = getGroupList();
+    getGroupList().then((res)=>{
+      console.log(res)
+    })
   },
   methods: {
     //获取消息列表

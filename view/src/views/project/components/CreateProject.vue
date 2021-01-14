@@ -59,7 +59,7 @@
 
 <script>
 import { PlusOutlined, CheckOutlined } from "@ant-design/icons-vue";
-import { apiPost } from "@/plugins/axios";
+import { request } from "@/plugins/request";
 import moment from "moment";
 
 export default {
@@ -88,7 +88,7 @@ export default {
 
       if (this.form.title.length > 120)
         return this.$message.warn("项目名称不能超过120个字，请精简名称");
-      apiPost("project/create_project.html", this.form);
+      request.get("project/create_project.html", this.form);
     },
     close() {
       this.visible = false;

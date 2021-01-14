@@ -41,7 +41,7 @@
 <script>
 import {PlusCircleOutlined} from '@ant-design/icons-vue'
 import {getDepartmentList,getGroupId} from "@/api/group";
-import axios from "@/plugins/axios";
+import {request} from "@/plugins/request";
 import {notice} from "@/plugins/utils";
 
 export default {
@@ -70,7 +70,7 @@ export default {
   methods:{
     onSubmit(data){
       data.group_id = getGroupId()
-      axios.post('member/create_department',data)
+      request.post('member/create_department',data)
       .then((res)=>{
         notice(res.code,res.msg)
         if(res.code === 200){
