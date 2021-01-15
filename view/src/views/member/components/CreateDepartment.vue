@@ -40,7 +40,6 @@
 
 <script>
 import {PlusCircleOutlined} from '@ant-design/icons-vue'
-import {getDepartmentList,getGroupId} from "@/api/group";
 import {request} from "@/plugins/request";
 import {notice} from "@/plugins/utils";
 
@@ -54,7 +53,7 @@ export default {
     return {
       visible: false,
       department:[],
-      form:{name:'', pid:0,group_id:getGroupId()},
+      form:{name:'', pid:0,group_id:''},
       rules:{
         name:[
             {required:true,message:'部门名称不能为空'},
@@ -65,11 +64,11 @@ export default {
     }
   },
   created(){
-    this.department = getDepartmentList()
+    this.department =[]
   },
   methods:{
     onSubmit(data){
-      data.group_id = getGroupId()
+      data.group_id = request.groupId()
       request.post('member/create_department',data)
       .then((res)=>{
         notice(res.code,res.msg)
@@ -77,7 +76,7 @@ export default {
           this.callback()
           this.visible =false
           setTimeout(()=>{
-            getDepartmentList(true)
+           // getDepartmentList(true)
           },1000)
         }
       })

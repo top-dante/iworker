@@ -1,5 +1,4 @@
 import {request} from "@/plugins/request";
-import {notice} from "@/plugins/utils";
 
 
 /**
@@ -27,27 +26,21 @@ export function getGroupId() {
  * 获取团队信息
  * @returns {string|any}
  */
-export function getGroupList() {
-   return request.get('member/get_group_list', {uid: request.uid()})
+export function groupList() {
+    return request.get('member/get_group_list',
+        {uid: request.uid()})
 }
 
 /**
  * 根据groupId获取部门列表
  * @returns {string|any}
  */
-export function getDepartmentList() {
-    return request.get('member/get_department_list', {group_id: request.groupId()})
-        .then((r) => {
-            return r.data
-        }).catch((e) => {
-            notice(500, e.message)
-        })
+export function departmentList() {
+    return request.get('member/get_department_list',
+        {group_id: request.groupId()})
 }
 
 export function delDepartment(id) {
-    request.get('member/del_department', {
-        depart_id: id
-    }).then((res) => {
-        console.log(res)
-    })
+    return request.get('member/del_department',
+        {depart_id: id})
 }

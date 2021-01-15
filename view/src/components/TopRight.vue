@@ -59,9 +59,7 @@
       <a-dropdown>
         <div class="line-full" :style="{verticalAlign:'middle'}">
           <a-avatar :size="28" :src="userInfo.avatar"/>
-          <span :style="{margin:'0 8px'}">
-                    {{ userInfo.username }}
-                </span>
+          <span :style="{margin:'0 8px'}">{{ userInfo.username }}</span>
           <span class="ellipsis"></span>
         </div>
         <template #overlay>
@@ -110,7 +108,8 @@ import {
 } from '@ant-design/icons-vue'
 import {notification} from 'ant-design-vue'
 import {getUserInfo} from "@/api/user";
-import {getGroupList} from "@/api/group";
+import {groupList} from "@/api/group";
+import {notice} from "@/plugins/utils";
 
 export default {
   name: "TopRight",
@@ -133,11 +132,25 @@ export default {
     }
   },
   created() {
-    getGroupList().then((res)=>{
-      console.log(res)
-    })
+    this.getGroupList()
   },
   methods: {
+    getGroupList(){
+      this.group = JSON.parse(localStorage.getItem('group'))
+      if(!this.group){
+        groupList().then((res)=>{
+          if(res.code === 200){
+            this.group = res.data
+            this.currentGroup = res.data[0]
+            localStorage.setItem('group_id',res.data.[0].group_id)
+            localStorage.setItem('group',JSON.stringify(res.data))
+          }else {
+            notice(res.code,res.msg)
+          }
+        })
+      }
+      this.currentGroup = this.group[0]
+    },
     //获取消息列表
     getNoticeList() {
       if (this.noticeList.length === 0) {

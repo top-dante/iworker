@@ -35,17 +35,13 @@
         </template>
       </template>
     </a-menu>
-    <a-popconfirm title="您将删除此部门，请谨慎操作！" @confirm="confirm" @cancel="cancel">
-      <a href="#">Delete</a>
-    </a-popconfirm>
   </div>
 </template>
 
 <script>
 import {BulbOutlined} from '@ant-design/icons-vue'
 import CreateDepartment from "@/views/member/components/CreateDepartment";
-import {getGroupId} from '@/api/group'
-import {request} from "@/plugins/request";
+import {departmentList} from '@/api/group'
 
 export default {
   name: "Department",
@@ -59,15 +55,18 @@ export default {
     }
   },
   created(){
-    this.department = this.getDepartmentList()
+   this.getDepartmentList()
   },
   methods: {
     menuOnClick({ item, key, keyPath }) {
       console.log({ item, key, keyPath });
     },
     getDepartmentList(){
-      let groupId = getGroupId()
-      request.get('member/get_department_list',{group_id:groupId})
+      departmentList().then((res)=>{
+        if(res.code === 200){
+          this.department = res.data
+        }
+      })
     },
     callback(){
       this.department = this.getDepartmentList(true)
