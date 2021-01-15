@@ -59,9 +59,7 @@ export default {
           {required: true, message: '部门名称不能为空'},
           {max: 20, message: '部门名称不能超过20个字符'}
         ],
-        pid: [
-            {required: true, message: '请选择上级部门'},
-        ]
+        pid: [{required: true, type:'number',message: '请选择上级部门'}]
       }
     }
   },
@@ -73,8 +71,9 @@ export default {
       data.group_id = localStorage.getItem('group_id')
       let res = await create(data);
       if(res.code === 200){
-        this.visible = false
-
+        this.visible = false;
+        //重置表单
+        this.form = {name: '', pid: 0};
         setTimeout(()=>{
           this.callback()
         },1000)

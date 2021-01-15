@@ -46,6 +46,7 @@ class GroupDepartment extends Model
         }
         $result = $this->where('group_id',request()->get('group_id',''))
             ->select();
+        $result = getTree($result->toArray(),'depart_id');
         return restful(200,'ok',$result);
     }
 

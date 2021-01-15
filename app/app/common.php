@@ -62,17 +62,16 @@ function verifyCrypt($string, $token): bool
 function getTree($list, $pk = 'id', $pid = 'pid',$child = 'children', $root = 0): array
 {
     $items = [];
-    $tree = [];
     foreach ($list as $value){
        $items[$value[$pk]] = $value;
     }
+    $tree = [];
     foreach ($items as $key =>$val) {
-        if ($val[$pid] == $root) {//代表跟节点
-            $tree[] = & $items[$key];
-        } else {
-            //找到其父类
-            $items[$val[$pid]][$child][] = & $items[$key];
-        }
+       if(isset($items[$val[$pid]])){
+           $items[$val[$pid]][$child][] = &$items[$key];
+       }else{
+           $tree[] = &$items[$key];
+       }
     }
     return $tree;
 }

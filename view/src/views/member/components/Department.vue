@@ -4,18 +4,32 @@
       部门管理
       <CreateDepartment :callback="callback"/>
     </div>
-    <a-menu @click="menuOnClick" :style="{borderRight:'none'}">
+    <a-menu @click="menuOnClick" mode="inline" :style="{borderRight:'none'}">
       <a-menu-item :key="0"><BulbOutlined />所有部门</a-menu-item>
       <template v-for="item in department">
         <template v-if="item.children">
-          <a-sub-menu :key="item.id" :title="item.name">
-            <a-menu-item v-for="vo in item.children" @click="delDepartment(vo)" :key="vo.depart_id">
+          <a-sub-menu :key="item.id">
+            <template #title><span><MenuOutlined/></span>{{item.name}}</template>
+            <a-menu-item :key="item.depart_id"><BulbOutlined />{{item.name}}</a-menu-item>
+            <a-menu-item v-for="vo in item.children" :key="vo.depart_id">
               <BulbOutlined />{{vo.name}}
+              <a-dropdown placement="bottomCenter">
+                      <span class="dropdown-icon">
+                       <span class="ellipsis"></span>
+                      </span>
+                <template #overlay>
+                  <a-menu>
+                    <a-menu-item>编辑</a-menu-item>
+                    <a-menu-item @click="delDepartment(vo)">删除</a-menu-item>
+                  </a-menu>
+                </template>
+              </a-dropdown>
             </a-menu-item>
           </a-sub-menu>
         </template>
         <template v-else>
-          <a-menu-item :key="item.depart_id"><BulbOutlined />{{item.name}}
+          <a-menu-item :key="item.depart_id">
+            <BulbOutlined />{{item.name}}
             <a-dropdown placement="bottomCenter">
                       <span class="dropdown-icon">
                        <span class="ellipsis"></span>
@@ -33,11 +47,12 @@
         </template>
       </template>
     </a-menu>
+<!-- //编辑部门modal-->
   </div>
 </template>
 
 <script>
-import {BulbOutlined} from '@ant-design/icons-vue'
+import {BulbOutlined,MenuOutlined} from '@ant-design/icons-vue'
 import CreateDepartment from "@/views/member/components/CreateDepartment";
 import {list,del} from '@/api/department'
 import {notice} from "@/plugins/utils";
@@ -46,19 +61,21 @@ export default {
   name: "Department",
   components:{
     BulbOutlined,
-    CreateDepartment
+    CreateDepartment,
+    MenuOutlined
   },
   data(){
     return {
-      department:[]
+      department:[],
+      current:0
     }
   },
   created(){
    this.getDepartmentList()
   },
   methods: {
-    menuOnClick({ item, key, keyPath }) {
-      console.log({ item, key, keyPath });
+    menuOnClick({ key}) {
+      this.current = key
     },
     async getDepartmentList(){
       let res = await list()
@@ -97,14 +114,14 @@ export default {
 <style scoped>
 .department{
   border-top: 1px solid #f0f0f0;
-  padding-top: 4px;
   min-height: 420px;
   padding-bottom: 30px;
 }
 .department .title {
-  padding:8px 16px;
+  padding:12px 24px;
   color: rgba(0,0,0,.45);
   margin-bottom: 4px;
+  border-bottom: 1px solid #f0f0f0;
 }
 .dropdown-icon {
   float: right;
