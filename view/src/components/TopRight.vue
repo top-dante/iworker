@@ -108,7 +108,7 @@ import {
 } from '@ant-design/icons-vue'
 import {notification} from 'ant-design-vue'
 import {getUserInfo} from "@/api/user";
-import {groupList} from "@/api/group";
+import {list} from "@/api/group";
 import {notice} from "@/plugins/utils";
 
 export default {
@@ -135,19 +135,18 @@ export default {
     this.getGroupList()
   },
   methods: {
-    getGroupList(){
+    async getGroupList(){
       this.group = JSON.parse(localStorage.getItem('group'))
       if(!this.group){
-        groupList().then((res)=>{
-          if(res.code === 200){
-            this.group = res.data
-            this.currentGroup = res.data[0]
-            localStorage.setItem('group_id',res.data.[0].group_id)
-            localStorage.setItem('group',JSON.stringify(res.data))
-          }else {
-            notice(res.code,res.msg)
-          }
-        })
+        let res  = await list()
+        if(res.code === 200){
+          this.group = res.data
+          this.currentGroup = res.data[0]
+          localStorage.setItem('group_id',res.data.[0].group_id)
+          localStorage.setItem('group',JSON.stringify(res.data))
+        }else {
+          notice(res.code,res.msg)
+        }
       }
       this.currentGroup = this.group[0]
     },

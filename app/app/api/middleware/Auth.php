@@ -12,7 +12,7 @@ class Auth
      * @param \Closure $next
      * @return \think\response\Json
      */
-    public function handle($request, \Closure $next): \think\response\Json
+    public function handle($request, \Closure $next)
     {
         $authorization = request()->header('Authorization');
         //是否传header token
@@ -25,7 +25,6 @@ class Auth
         if(verifyCrypt($authorization[1],$token)){
             return json(restFul(40003,'token校验失败，请重新登陆!'));
         };
-
         return $next($request);
     }
 }

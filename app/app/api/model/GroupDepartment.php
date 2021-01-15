@@ -46,7 +46,35 @@ class GroupDepartment extends Model
         }
         $result = $this->where('group_id',request()->get('group_id',''))
             ->select();
-        $data = getTree($result,'depart_id');
-        return restful(200,'ok',$data);
+        return restful(200,'ok',$result);
+    }
+
+    /**
+     * 更新
+     * @return array
+     */
+    public function updateDepartment(): array
+    {
+        $request = request()->post();
+        try {
+            $this->update($request);
+            return  restful(200,'更新成功');
+        }catch (Exception $exception){
+            return restful(500,$exception->getMessage());
+        }
+    }
+
+    public function delDepartment(): array
+    {
+        $request = request()->get('depart_id','');
+        if(!$request){
+            return  restful(403,'无法获取部门ID，请刷新重试！');
+        }
+        try {
+            $this->where('depart_id',$request)->delete();
+            return  restful(200,'删除成功！');
+        }catch (Exception $exception){
+            return  restful(500,$exception->getMessage());
+        }
     }
 }

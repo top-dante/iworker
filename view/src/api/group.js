@@ -1,6 +1,5 @@
 import {request} from "@/plugins/request";
 
-
 /**
  * 获取当前团队信息
  * @returns {*[]|any}
@@ -22,14 +21,24 @@ export function getGroupId() {
     return getGroup().group_id
 }
 
-/**
- * 获取团队信息
- * @returns {string|any}
- */
-export function groupList() {
+//团队列表
+export function list() {
     return request.get('member/get_group_list',
         {uid: request.uid()})
 }
+//创建团队
+export function createGroup(data){
+    return request.post('member/create_group',data)
+}
+//更新团队信息
+export function updateGroup(data){
+    return request.post('member/update_group',data)
+}
+//删除团队
+export function delGroup(groupId){
+    return request.get('member/delete_group',{group_id:groupId})
+}
+
 
 /**
  * 根据groupId获取部门列表

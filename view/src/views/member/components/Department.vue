@@ -9,9 +9,7 @@
       <template v-for="item in department">
         <template v-if="item.children">
           <a-sub-menu :key="item.id" :title="item.name">
-            <a-menu-item v-for="vo in item.children"
-                         @click="delDepartment(vo)"
-                         :key="vo.depart_id">
+            <a-menu-item v-for="vo in item.children" @click="delDepartment(vo)" :key="vo.depart_id">
               <BulbOutlined />{{vo.name}}
             </a-menu-item>
           </a-sub-menu>
@@ -41,7 +39,8 @@
 <script>
 import {BulbOutlined} from '@ant-design/icons-vue'
 import CreateDepartment from "@/views/member/components/CreateDepartment";
-import {departmentList} from '@/api/group'
+import {list,del} from '@/api/department'
+import {notice} from "@/plugins/utils";
 
 export default {
   name: "Department",
@@ -61,30 +60,32 @@ export default {
     menuOnClick({ item, key, keyPath }) {
       console.log({ item, key, keyPath });
     },
-    getDepartmentList(){
-      departmentList().then((res)=>{
-        if(res.code === 200){
-          this.department = res.data
-        }
-      })
+    async getDepartmentList(){
+      let res = await list()
+      if(res.code === 200){
+        this.department = res.data
+        localStorage.setItem('department',JSON.stringify(res.data))
+      }
     },
     callback(){
-      this.department = this.getDepartmentList(true)
+      this.department = this.getDepartmentList()
     },
     delDepartment(item){
-      console.log(item)
+      const _this = this
       this.$confirm({
         title: '部门删除确认',
         content:'您将删除-['+item.name+']-部门，此操作不可逆，请谨慎操作！',
         okText:'确认',
         okType:'danger',
         cancelText:'取消',
-        onOk() {
-          console.log('OK');
-        },
-        onCancel() {
-          console.log('Cancel');
-        },
+        async onOk() {
+          let res = await del({depart_id: item.depart_id})
+          if(res.code === 200){
+            await _this.getDepartmentList()
+            _this.$destroyAll()
+          }
+          notice(res.code,res.msg)
+        }
       });
     },
     confirm(){},

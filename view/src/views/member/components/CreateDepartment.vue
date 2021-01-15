@@ -1,7 +1,7 @@
 <template>
 <span>
   <span @click="visible = true" class="link float-right">
-    <PlusCircleOutlined /> 添加部门
+    <PlusCircleOutlined/> 添加部门
   </span>
   <a-modal
       @cancel="visible = false"
@@ -25,7 +25,7 @@
                 :value="item.depart_id"
                 v-for="item in department"
                 :key="item.depart_id">
-              {{item.name}}
+              {{ item.name }}
             </a-select-option>
           </a-select>
         </a-form-item>
@@ -40,46 +40,47 @@
 
 <script>
 import {PlusCircleOutlined} from '@ant-design/icons-vue'
-import {request} from "@/plugins/request";
 import {notice} from "@/plugins/utils";
+import {create} from "@/api/department";
 
 export default {
   name: "CreateDepartment",
-  props:['callback'],
+  props: ['callback'],
   components: {
     PlusCircleOutlined
   },
   data() {
     return {
       visible: false,
-      department:[],
-      form:{name:'', pid:0,group_id:''},
-      rules:{
-        name:[
-            {required:true,message:'部门名称不能为空'},
-            {max:20,message: '部门名称不能超过20个字符'}
-           ],
-        pid: [{required:true,message:'请选择上级部门'}]
+      department: [],
+      form: {name: '', pid: 0},
+      rules: {
+        name: [
+          {required: true, message: '部门名称不能为空'},
+          {max: 20, message: '部门名称不能超过20个字符'}
+        ],
+        pid: [
+            {required: true, message: '请选择上级部门'},
+        ]
       }
     }
   },
-  created(){
-    this.department =[]
+  created() {
+    this.department = JSON.parse(localStorage.getItem('department'))
   },
-  methods:{
-    onSubmit(data){
-      data.group_id = request.groupId()
-      request.post('member/create_department',data)
-      .then((res)=>{
-        notice(res.code,res.msg)
-        if(res.code === 200){
+  methods: {
+    async onSubmit(data) {
+      data.group_id = localStorage.getItem('group_id')
+      let res = await create(data);
+      if(res.code === 200){
+        this.visible = false
+
+        setTimeout(()=>{
           this.callback()
-          this.visible =false
-          setTimeout(()=>{
-           // getDepartmentList(true)
-          },1000)
-        }
-      })
+        },1000)
+
+      }
+      notice(res.code,res.msg)
     }
   }
 }
