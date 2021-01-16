@@ -55,7 +55,9 @@ class Group extends Model
      */
     public function getGroupList(): array
     {
-        $data = $this->where('uid',request()->get('uid',''))->select();
+        $data = $this->where('uid',request()->get('uid',''))
+            ->order('create_time','asc')
+            ->select();
         return restful(200,'ok',$data);
     }
 

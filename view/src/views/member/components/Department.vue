@@ -19,7 +19,7 @@
                       </span>
                 <template #overlay>
                   <a-menu>
-                    <a-menu-item>编辑</a-menu-item>
+                    <a-menu-item @click="onUpdate(vo)">编辑</a-menu-item>
                     <a-menu-item @click="delDepartment(vo)">删除</a-menu-item>
                   </a-menu>
                 </template>
@@ -36,7 +36,7 @@
                       </span>
               <template #overlay>
                 <a-menu>
-                  <a-menu-item>编辑</a-menu-item>
+                  <a-menu-item @click="onUpdate(item)">编辑</a-menu-item>
                   <a-menu-item @click="delDepartment(item)">
                       删除
                    </a-menu-item>
@@ -48,13 +48,36 @@
       </template>
     </a-menu>
 <!-- //编辑部门modal-->
+    <a-modal :visible="visible"
+             @cancel="visible = false"
+             :width="320"
+             :footer="null"
+             title="部门编辑">
+        <a-form layout="vertical">
+          <a-form-item><a-input v-model:value="form.name"/></a-form-item>
+          <a-form-item>
+            <a-select v-model:value="form.pid">
+              <a-select-option :key="0">一级部门</a-select-option>
+              <a-select-option v-for="item in department"
+                               :key="item.depart_id"
+                               :value="item.depart_id">
+                  {{item.name}}
+              </a-select-option>
+            </a-select>
+          </a-form-item>
+          <div :style="{textAlign:'right'}">
+            <a-button type="primary" @click="updateDepartment">确认</a-button>
+            <a-button @click="visible = false" class="ml">取消</a-button>
+          </div>
+        </a-form>
+    </a-modal>
   </div>
 </template>
 
 <script>
 import {BulbOutlined,MenuOutlined} from '@ant-design/icons-vue'
 import CreateDepartment from "@/views/member/components/CreateDepartment";
-import {list,del} from '@/api/department'
+import {list,del,update} from '@/api/department'
 import {notice} from "@/plugins/utils";
 
 export default {
@@ -67,7 +90,9 @@ export default {
   data(){
     return {
       department:[],
-      current:0
+      current:0,
+      visible:false,
+      form:{depart_id:'',name:'',pid:0,group_id:'',status:1}
     }
   },
   created(){
@@ -105,8 +130,20 @@ export default {
         }
       });
     },
-    confirm(){},
-    cancel(){}
+    onUpdate(item){
+      this.form = item
+      this.visible = true
+    },
+    async updateDepartment(){
+      let res = await update(this.form);
+      if(res.code === 200){
+        setTimeout(()=>{
+          this.getDepartmentList()
+          this.visible = false
+        },2000)
+      }
+      notice(res.code,res.msg)
+    }
   }
 }
 </script>

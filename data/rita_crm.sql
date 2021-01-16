@@ -10,7 +10,7 @@ Target Server Type    : MariaDB
 Target Server Version : 100508
 File Encoding         : 65001
 
-Date: 2021-01-15 23:19:30
+Date: 2021-01-16 16:41:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -48,6 +48,10 @@ CREATE TABLE `rita_group` (
 -- ----------------------------
 -- Records of rita_group
 -- ----------------------------
+INSERT INTO `rita_group` VALUES ('16f6002656e24a55nn', '50e5ff678173a4eas8', '测试创建团队排序', null, null, '1610769774', '0', '1');
+INSERT INTO `rita_group` VALUES ('16h60026001ac861dc', '50e5ff678173a4eas8', '测试团队创建流程', null, null, '1610768385', '0', '1');
+INSERT INTO `rita_group` VALUES ('58p6002652f1a68d3c', '50e5ff678173a4eas8', '测试添加255', null, null, '1610769711', '0', '1');
+INSERT INTO `rita_group` VALUES ('9kf60026594f0dbdh2', '50e5ff678173a4eas8', '腾讯计算机科技有限公司', null, null, '1610769812', '0', '1');
 INSERT INTO `rita_group` VALUES ('h0m5ff9c29c772e151', '50e5ff678173a4eas8', '普洱万维广告有限公司', null, null, '1610203804', '0', '1');
 INSERT INTO `rita_group` VALUES ('jms5ff9c1eb38c67xv', '50e5ff678173a4eas8', '普洱市简瑞科技有限公司', null, null, '1610203627', '0', '1');
 
@@ -72,7 +76,6 @@ INSERT INTO `rita_group_department` VALUES ('2', '0', 'h0m5ff9c29c772e151', '设
 INSERT INTO `rita_group_department` VALUES ('3', '0', 'h0m5ff9c29c772e151', '工程部', '1');
 INSERT INTO `rita_group_department` VALUES ('4', '0', 'h0m5ff9c29c772e151', '销售部', '1');
 INSERT INTO `rita_group_department` VALUES ('5', '0', 'h0m5ff9c29c772e151', '工程部', '1');
-INSERT INTO `rita_group_department` VALUES ('8', '0', 'h0m5ff9c29c772e151', '测试修改', '1');
 INSERT INTO `rita_group_department` VALUES ('9', '3', 'h0m5ff9c29c772e151', '工程主管', '1');
 INSERT INTO `rita_group_department` VALUES ('10', '3', 'h0m5ff9c29c772e151', '工程部员工', '1');
 INSERT INTO `rita_group_department` VALUES ('11', '2', 'h0m5ff9c29c772e151', '设计主管', '1');

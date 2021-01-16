@@ -31,29 +31,7 @@
       </a-dropdown>
     </div>
     <div class="item">
-      <a-dropdown placement="bottomRight">
-        <div class="line-full">
-          {{ currentGroup.group_name }}
-          <DownOutlined/>
-        </div>
-        <template #overlay>
-          <a-menu @click="onGroupItem">
-            <template v-if="group.length>0">
-              <a-menu-item v-for="(item,index) in group" :key="index">
-                {{ item.group_name }}
-              </a-menu-item>
-            </template>
-            <template v-else>
-              <div class="padding text-sm text-gray">暂无团队，请新建</div>
-            </template>
-            <a-menu-divider/>
-            <a-menu-item class="text-center" key="create">
-              <PlusOutlined/>
-              创建团队
-            </a-menu-item>
-          </a-menu>
-        </template>
-      </a-dropdown>
+      <Group/>
     </div>
     <div class="item">
       <a-dropdown>
@@ -102,14 +80,11 @@ import {
   SettingOutlined,
   MenuOutlined,
   ShareAltOutlined,
-  LogoutOutlined,
-  DownOutlined,
-  PlusOutlined
+  LogoutOutlined
 } from '@ant-design/icons-vue'
 import {notification} from 'ant-design-vue'
 import {getUserInfo} from "@/api/user";
-import {list} from "@/api/group";
-import {notice} from "@/plugins/utils";
+import Group from "@/views/group/components/Group";
 
 export default {
   name: "TopRight",
@@ -120,36 +95,18 @@ export default {
     MenuOutlined,
     ShareAltOutlined,
     LogoutOutlined,
-    DownOutlined,
-    PlusOutlined
+    Group
   },
   data() {
     return {
       noticeList: [],
-      group:[],
       userInfo: getUserInfo(),
-      currentGroup: []
     }
   },
   created() {
-    this.getGroupList()
+    this.getNoticeList()
   },
   methods: {
-    async getGroupList(){
-      this.group = JSON.parse(localStorage.getItem('group'))
-      if(!this.group){
-        let res  = await list()
-        if(res.code === 200){
-          this.group = res.data
-          this.currentGroup = res.data[0]
-          localStorage.setItem('group_id',res.data.[0].group_id)
-          localStorage.setItem('group',JSON.stringify(res.data))
-        }else {
-          notice(res.code,res.msg)
-        }
-      }
-      this.currentGroup = this.group[0]
-    },
     //获取消息列表
     getNoticeList() {
       if (this.noticeList.length === 0) {
@@ -161,13 +118,6 @@ export default {
           })
         }
       }
-    },
-    onGroupItem({key}) {
-      if (key === 'none' || key === 'create') {
-        return false;
-      }
-      this.currentGroup = this.group[key]
-      localStorage.setItem('current_group', JSON.stringify(this.currentGroup))
     },
     /**
      * 退出登录

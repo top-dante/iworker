@@ -1,9 +1,6 @@
 <template>
     <span>
-      <a-button type="dashed"
-                @click="visible = true">
-        <template #icon><PlusOutlined/></template>
-        创建团队</a-button>
+      <span @click="visible = true"><PlusOutlined/> 创建团队</span>
       <a-modal :visible="visible"
                title="创建团队"
                :width="400"
@@ -16,13 +13,14 @@
 
 <script>
 import {PlusOutlined} from '@ant-design/icons-vue'
-import {request} from "@/plugins/request";
+import {create} from "@/api/group";
 import {notice} from "@/plugins/utils";
-import  {getUserId} from '@/api/user'
+import {getUserId} from "@/api/user";
 
 
 export default {
-  name: "CreateTeam",
+  name: "CreateGroup",
+  props:['reload'],
   components: {
     PlusOutlined
   },
@@ -33,22 +31,21 @@ export default {
     }
   },
   methods:{
-    onSubmit(){
-      if(!this.groupName){
-        return notice(403,'团队名称不能为空');
+    async onSubmit() {
+      if (!this.groupName) {
+        return notice(403, '团队名称不能为空');
       }
       let params = {
-        group_name:this.groupName,
-        uid:getUserId()
+        group_name: this.groupName,
+        uid: getUserId()
       }
-      request.post('member/create_group',params)
-        .then((res)=>{
-          notice(res.code,res.msg)
-          if(res.code === 200){
-            this.visible = false
-            this.groupName = ''
-          }
-        })
+      let res = await create(params)
+      notice(res.code, res.msg)
+      if (res.code === 200) {
+        this.visible = false
+        this.groupName = '';
+        this.reload(true)
+      }
     }
   }
 }

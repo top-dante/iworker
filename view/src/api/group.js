@@ -27,15 +27,15 @@ export function list() {
         {uid: request.uid()})
 }
 //创建团队
-export function createGroup(data){
+export function create(data){
     return request.post('member/create_group',data)
 }
 //更新团队信息
-export function updateGroup(data){
+export function update(data){
     return request.post('member/update_group',data)
 }
 //删除团队
-export function delGroup(groupId){
+export function del(groupId){
     return request.get('member/delete_group',{group_id:groupId})
 }
 
