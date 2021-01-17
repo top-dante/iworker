@@ -1,16 +1,16 @@
 <template>
   <span>
     <a-button type="primary" @click="visible = true">
-      <template #icon><PlusOutlined /></template>
+      <template #icon><PlusOutlined/></template>
       添加成员
     </a-button>
     <a-modal
-      :width="450"
-      title="添加新成员"
-      :visible="visible"
-      :footer="null"
-      @finish="onSubmit"
-      @cancel="visible = false"
+        :width="450"
+        title="添加新成员"
+        :visible="visible"
+        :footer="null"
+        @finish="onSubmit"
+        @cancel="visible = false"
     >
       <a-form :label-col="{ span: 4 }"
               :model="member"
@@ -28,32 +28,32 @@
                   <a-select-option v-for="vo in item.children"
                                    :value="vo.depart_id"
                                    :key="vo.depart_id">
-                    {{vo.name}}
+                    {{ vo.name }}
                   </a-select-option>
                 </a-select-opt-group>
               </template>
               <template v-else>
                 <a-select-option :value="item.depart_id" :key="item.depart_id">
-                  {{item.name}}
+                  {{ item.name }}
                 </a-select-option>
               </template>
             </template>
           </a-select>
         </a-form-item>
         <a-form-item label="手机" name="mobile" :wrapper-col="{ span: 14 }">
-          <a-input v-model:value="member.mobile" placeholder="请输入"></a-input>
+          <a-input v-model:value="member.mobile" type="number" placeholder="请输入"></a-input>
         </a-form-item>
         <a-form-item
-          label="地址"
-          help="请输入员工的居住地址"
-          name="address"
-          :wrapper-col="{ span: 20 }"
+            label="地址"
+            help="请输入员工的居住地址"
+            name="address"
+            :wrapper-col="{ span: 20 }"
         >
           <a-input v-model:value="member.address" placeholder="居住地址"></a-input>
         </a-form-item>
         <a-form-item :wrapper-col="{ offset: 4, span: 20 }">
-          <a-button type="primary" :loading="loading" @click="onSubmit">
-            <template #icon><CheckOutlined /></template>
+          <a-button type="primary" :loading="loading" html-type="submit">
+            <template #icon><CheckOutlined/></template>
             确认
           </a-button>
           <a-button :style="{ marginLeft: '16px' }"
@@ -66,7 +66,9 @@
   </span>
 </template>
 <script>
-import { PlusOutlined, CheckOutlined } from "@ant-design/icons-vue";
+import {PlusOutlined, CheckOutlined} from "@ant-design/icons-vue";
+import {create} from "@/api/member";
+import {notice} from "@/plugins/utils";
 
 export default {
   name: "createMember",
@@ -78,46 +80,43 @@ export default {
     return {
       visible: false,
       loading: false,
-      member:{
-        username:'',
-        depart_id:'',
-        mobile:'',
+      member: {
+        username: '',
+        depart_id: '',
+        mobile: '',
         address: ''
       },
       rules: {
-        username: [{ required: true, message: "请输入员工姓名", trigger: "blur" }],
+        username: [{required: true, message: "请输入员工姓名", trigger: "blur"}],
         depart_id: [
-            { required: true,type:'number', message: "请选择员工共所属部门" }
-            ],
-        mobile: [
-          { required: true, message: "请输入员工手机号码" },
-          { len:11,type:'number', message: "请输入正确的手机号码" }
+          {required: true, type: 'number', message: "请选择员工共所属部门"}
         ],
-        address: [{ required: true, message: "请输入员工的居住地址" }],
+        mobile: [
+          {required: true, message: "请输入员工手机号码"},
+          {len: 11, message: "请输入正确的手机号码"}
+        ],
+        address: [{required: true, message: "请输入员工的居住地址"}],
       },
-      department:[]
+      department: []
     };
   },
-  created(){
+  created() {
     let depart = localStorage.getItem('department')
-    if(depart){
-      this.department  =JSON.parse(depart)
+    if (depart) {
+      this.department = JSON.parse(depart)
     }
   },
   methods: {
-    onSubmit() {
-      this.$refs.ruleForm
-          .validate()
-          .then(()=>{
-            this.loading = true;
-            setTimeout(() => {
-              this.loading = false;
-            }, 5000);
-          }).catch((error)=>{
-            console.log(this.member.mobile.length)
-            console.log(error)
-      })
-
+    async onSubmit(data) {
+      this.loading = true;
+      let res = await create(data)
+      if (res.code === 200) {
+        this.visible = false
+      }
+      notice(res.code,res.msg)
+      setTimeout(() => {
+        this.loading = false;
+      }, 5000);
     },
   },
 };
