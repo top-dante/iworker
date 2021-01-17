@@ -9,31 +9,55 @@
       title="添加新成员"
       :visible="visible"
       :footer="null"
+      @finish="onSubmit"
       @cancel="visible = false"
     >
-      <a-form :label-col="{ span: 4 }" :wrapper-col="{ span: 14 }">
-        <a-form-item label="姓名">
-          <a-input placeholder="请输入员工姓名"></a-input>
+      <a-form :label-col="{ span: 4 }"
+              :model="member"
+              ref="ruleForm"
+              :rules="rules"
+              :wrapper-col="{ span: 14 }">
+        <a-form-item label="姓名" name="username">
+          <a-input v-model:value="member.username" placeholder="请输入员工姓名"></a-input>
         </a-form-item>
-        <a-form-item label="部门" :wrapper-col="{ span: 14 }">
-          <a-select placeholder="请选择"></a-select>
+        <a-form-item label="部门" :wrapper-col="{ span: 14 }" name="depart_id">
+          <a-select placeholder="请选择" v-model:value="member.depart_id">
+            <template v-for="item in department">
+              <template v-if="item.children">
+                <a-select-opt-group :key="item.depart_id" :label="item.name">
+                  <a-select-option v-for="vo in item.children"
+                                   :value="vo.depart_id"
+                                   :key="vo.depart_id">
+                    {{vo.name}}
+                  </a-select-option>
+                </a-select-opt-group>
+              </template>
+              <template v-else>
+                <a-select-option :value="item.depart_id" :key="item.depart_id">
+                  {{item.name}}
+                </a-select-option>
+              </template>
+            </template>
+          </a-select>
         </a-form-item>
-        <a-form-item label="手机" :wrapper-col="{ span: 14 }">
-          <a-input placeholder="请输入"></a-input>
+        <a-form-item label="手机" name="mobile" :wrapper-col="{ span: 14 }">
+          <a-input v-model:value="member.mobile" placeholder="请输入"></a-input>
         </a-form-item>
         <a-form-item
           label="地址"
           help="请输入员工的居住地址"
+          name="address"
           :wrapper-col="{ span: 20 }"
         >
-          <a-input placeholder="居住地址"></a-input>
+          <a-input v-model:value="member.address" placeholder="居住地址"></a-input>
         </a-form-item>
         <a-form-item :wrapper-col="{ offset: 4, span: 20 }">
           <a-button type="primary" :loading="loading" @click="onSubmit">
             <template #icon><CheckOutlined /></template>
             确认
           </a-button>
-          <a-button :style="{ marginLeft: '16px' }" @click="visible = false">
+          <a-button :style="{ marginLeft: '16px' }"
+                    @click="visible = false">
             取消
           </a-button>
         </a-form-item>
@@ -54,24 +78,46 @@ export default {
     return {
       visible: false,
       loading: false,
+      member:{
+        username:'',
+        depart_id:'',
+        mobile:'',
+        address: ''
+      },
       rules: {
-        name: [{ required: true, message: "请输入员工姓名", trigger: "blur" }],
-        department: [{ required: true, message: "请选择员工共所属部门" }],
+        username: [{ required: true, message: "请输入员工姓名", trigger: "blur" }],
+        depart_id: [
+            { required: true,type:'number', message: "请选择员工共所属部门" }
+            ],
         mobile: [
           { required: true, message: "请输入员工手机号码" },
-          { leng: 11, message: "请输入正确的手机号码" },
-          { type: "number", message: "请输入数字" },
+          { len:11,type:'number', message: "请输入正确的手机号码" }
         ],
         address: [{ required: true, message: "请输入员工的居住地址" }],
       },
+      department:[]
     };
+  },
+  created(){
+    let depart = localStorage.getItem('department')
+    if(depart){
+      this.department  =JSON.parse(depart)
+    }
   },
   methods: {
     onSubmit() {
-      this.loading = true;
-      setTimeout(() => {
-        this.loading = false;
-      }, 5000);
+      this.$refs.ruleForm
+          .validate()
+          .then(()=>{
+            this.loading = true;
+            setTimeout(() => {
+              this.loading = false;
+            }, 5000);
+          }).catch((error)=>{
+            console.log(this.member.mobile.length)
+            console.log(error)
+      })
+
     },
   },
 };
