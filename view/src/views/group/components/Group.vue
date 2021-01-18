@@ -56,6 +56,7 @@ export default {
         if(res.code === 200){
           this.group = res.data
           this.current = res.data[0]
+          this.$store.commit('setGroupId',res.data[0].group_id)
           localStorage.setItem('group_id',res.data.[0].group_id)
           localStorage.setItem('group',JSON.stringify(res.data))
         }else {
@@ -77,6 +78,7 @@ export default {
       this.current = this.group[key]
       localStorage.setItem('current_group', JSON.stringify(this.current))
       localStorage.setItem('group_id',this.current.group_id)
+      this.$store.commit('setGroupId',this.current.group_id)
     },
   }
 }

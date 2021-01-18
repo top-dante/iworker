@@ -23,6 +23,12 @@ class GroupDepartment extends Model
             'group_id'=>$request['group_id'],
             'pid'=>$request['pid']
         ];
+        $check = $this->where('name',$request['name'])
+            ->where('group_id',$request['group_id'])
+            ->find();
+        if($check){
+            return restful(403,'部门已经存在，请勿重复添加！');
+        }
         try {
             $this->save($data);
             return restful(200,'添加成功');

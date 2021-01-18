@@ -10,7 +10,7 @@ Target Server Type    : MariaDB
 Target Server Version : 100508
 File Encoding         : 65001
 
-Date: 2021-01-16 16:41:34
+Date: 2021-01-18 17:49:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -66,7 +66,7 @@ CREATE TABLE `rita_group_department` (
   `name` varchar(50) DEFAULT NULL,
   `status` int(11) DEFAULT 1,
   PRIMARY KEY (`depart_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of rita_group_department
@@ -80,6 +80,10 @@ INSERT INTO `rita_group_department` VALUES ('9', '3', 'h0m5ff9c29c772e151', '工
 INSERT INTO `rita_group_department` VALUES ('10', '3', 'h0m5ff9c29c772e151', '工程部员工', '1');
 INSERT INTO `rita_group_department` VALUES ('11', '2', 'h0m5ff9c29c772e151', '设计主管', '1');
 INSERT INTO `rita_group_department` VALUES ('12', '2', 'h0m5ff9c29c772e151', '设计部员工', '1');
+INSERT INTO `rita_group_department` VALUES ('13', '0', 'h0m5ff9c29c772e151', '行政部', '1');
+INSERT INTO `rita_group_department` VALUES ('14', '0', 'jms5ff9c1eb38c67xv', '工程部', '1');
+INSERT INTO `rita_group_department` VALUES ('15', '0', 'jms5ff9c1eb38c67xv', '行政部', '1');
+INSERT INTO `rita_group_department` VALUES ('17', '0', 'jms5ff9c1eb38c67xv', '销售部', '1');
 
 -- ----------------------------
 -- Table structure for rita_group_map
@@ -101,25 +105,25 @@ CREATE TABLE `rita_group_map` (
 -- ----------------------------
 DROP TABLE IF EXISTS `rita_group_member`;
 CREATE TABLE `rita_group_member` (
-  `user_id` varchar(18) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `depart_id` int(11) DEFAULT NULL,
+  `group_id` varchar(18) DEFAULT '',
   `username` varchar(50) DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `code` varchar(24) NOT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `email` varchar(120) DEFAULT NULL,
-  `mobile` varchar(50) DEFAULT NULL,
-  `reg_ip` varchar(50) DEFAULT NULL,
+  `mobile` varchar(22) DEFAULT '',
   `create_time` int(11) DEFAULT NULL,
-  `last_ip` varchar(50) DEFAULT NULL,
-  `last_time` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT 1,
-  PRIMARY KEY (`user_id`),
+  PRIMARY KEY (`id`),
   KEY `username` (`username`,`email`,`mobile`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of rita_group_member
 -- ----------------------------
+INSERT INTO `rita_group_member` VALUES ('1', '11', 'h0m5ff9c29c772e151', 'imdante', null, null, '62e0e0ode0dmqhe0e0kfod', '1610956918', '1');
+INSERT INTO `rita_group_member` VALUES ('2', '11', 'h0m5ff9c29c772e151', '王斌', null, null, '62e0e0ode0dmqhe0e0kfod', '1610957009', '1');
+INSERT INTO `rita_group_member` VALUES ('3', '10', '', '曾熙', null, null, '62xoe0ode00crldmkfrlrl', '1610957146', '1');
 
 -- ----------------------------
 -- Table structure for rita_member

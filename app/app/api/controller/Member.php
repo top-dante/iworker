@@ -6,13 +6,25 @@ namespace app\api\controller;
 
 use app\api\model\Group;
 use app\api\model\GroupDepartment;
+use app\api\model\GroupMember;
 
 class Member extends Base
 {
 
-    public function create_member()
+    public function index(): array
     {
-
+        return (new GroupMember())->getPage();
+    }
+    /**
+     * 添加成员
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function create_member(): array
+    {
+        return (new GroupMember())->createMember();
     }
 
     /**

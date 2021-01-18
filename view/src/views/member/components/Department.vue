@@ -92,7 +92,17 @@ export default {
       department:[],
       current:0,
       visible:false,
-      form:{depart_id:'',name:'',pid:0,group_id:'',status:1}
+      form:{depart_id:'',name:'',pid:0,group_id:'',status:1},
+    }
+  },
+  computed:{
+    groupId(){
+      return this.$store.getters.getGroupId
+    }
+  },
+  watch:{
+    groupId(){
+      this.getDepartmentList()
     }
   },
   created(){

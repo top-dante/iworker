@@ -2,10 +2,10 @@ import {request} from "@/plugins/request";
 
 const apiUrl ={
     create:'member/create_member',
-    update:'',
-    list:'',
-    get:'',
-    delete:''
+    update:'member/update',
+    list:'member/index',
+    get:'member/read',
+    delete:'member/delete'
 }
 
 //创建

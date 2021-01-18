@@ -4,6 +4,7 @@ import App from './App.vue'
 import router from './router'
 import 'ant-design-vue/dist/antd.css'
 import '@/assets/common.css'
+import store from './store'
 
 const documentTitle = 'RitaCRM-简单工作，快乐生活！';
 const whiteRouter = ['/user/login', '/user/register', '/user/recover'];
@@ -23,7 +24,8 @@ router.beforeEach((to, from, next) => {
         }
     }
 })
-const app = createApp(App);
+const app = createApp(App)
+app.use(store);
 app.use(Antd);
 app.use(router);
 app.mount('#app');

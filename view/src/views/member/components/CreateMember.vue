@@ -9,13 +9,13 @@
         title="添加新成员"
         :visible="visible"
         :footer="null"
-        @finish="onSubmit"
         @cancel="visible = false"
     >
       <a-form :label-col="{ span: 4 }"
               :model="member"
               ref="ruleForm"
               :rules="rules"
+              @finish="onSubmit"
               :wrapper-col="{ span: 14 }">
         <a-form-item label="姓名" name="username">
           <a-input v-model:value="member.username" placeholder="请输入员工姓名"></a-input>
@@ -52,29 +52,22 @@
           <a-input v-model:value="member.address" placeholder="居住地址"></a-input>
         </a-form-item>
         <a-form-item :wrapper-col="{ offset: 4, span: 20 }">
-          <a-button type="primary" :loading="loading" html-type="submit">
-            <template #icon><CheckOutlined/></template>
-            确认
-          </a-button>
-          <a-button :style="{ marginLeft: '16px' }"
-                    @click="visible = false">
-            取消
-          </a-button>
+          <a-button type="primary" :loading="loading" html-type="submit">确认</a-button>
+          <a-button :style="{ marginLeft: '16px' }" @click="visible = false">取消</a-button>
         </a-form-item>
       </a-form>
     </a-modal>
   </span>
 </template>
 <script>
-import {PlusOutlined, CheckOutlined} from "@ant-design/icons-vue";
+import {PlusOutlined} from "@ant-design/icons-vue";
 import {create} from "@/api/member";
 import {notice} from "@/plugins/utils";
 
 export default {
   name: "createMember",
   components: {
-    PlusOutlined,
-    CheckOutlined,
+    PlusOutlined
   },
   data() {
     return {
@@ -107,17 +100,27 @@ export default {
     }
   },
   methods: {
-    async onSubmit(data) {
+    onSubmit(data) {
       this.loading = true;
-      let res = await create(data)
-      if (res.code === 200) {
-        this.visible = false
-      }
-      notice(res.code,res.msg)
+      this.createMember(data)
       setTimeout(() => {
         this.loading = false;
       }, 5000);
     },
+    async createMember(data) {
+      data.group_id = this.$store.getters.getGroupId
+      let res = await create(data)
+      if (res.code === 200) {
+        this.visible = false
+        this.member = {
+          username: '',
+          depart_id: '',
+          mobile: '',
+          address: ''
+        }
+      }
+      notice(res.code, res.msg)
+    }
   },
 };
 </script>
