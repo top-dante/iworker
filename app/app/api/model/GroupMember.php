@@ -74,7 +74,7 @@ class GroupMember extends Model
     }
 
     //手机号码解密
-    public function setMobileAttr($value){
+    public function getMobileAttr($value){
         return decrypt($value);
     }
 }

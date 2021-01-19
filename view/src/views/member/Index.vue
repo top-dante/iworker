@@ -31,16 +31,28 @@
                      :row-selection="{ selectedRowKeys: selectKey, onChange: selectRowKey }"
                      :data-source="list" row-key="id">
               <template #username="{record}">
-                <a-avatar>
-                  <template #icon>
-                    <UserOutlined/>
-                  </template>
-                </a-avatar>
-                {{ record.username }}
-                <a-tag>{{ record.mobile }}</a-tag>
+                <a-tooltip title="点击查看成员详情" placement="right">
+                <span class="cursor-pointer">
+                  <a-avatar :style="{backgroundColor:'#1890ff'}">
+                    {{record.username.slice(0,1)}}
+                  </a-avatar>
+                  <span class="ml-xs">{{ record.username }}</span>
+                </span>
+                </a-tooltip>
               </template>
               <template #department="{ record }">
                 <a-tag>{{ record.department.name }}</a-tag>
+              </template>
+              <template #actions>
+                <a-tooltip title="编辑">
+                  <span class="action-item"><FormOutlined/></span>
+                </a-tooltip>
+                <a-tooltip title="禁用">
+                  <span class="action-item"><StopOutlined/></span>
+                </a-tooltip>
+                <a-tooltip title="删除">
+                  <span class="action-item"><DeleteOutlined/></span>
+                </a-tooltip>
               </template>
             </a-table>
           </a-card>
@@ -52,7 +64,7 @@
 
 <script>
 import Header from "../../components/Header";
-import {TeamOutlined, UserOutlined} from "@ant-design/icons-vue";
+import {TeamOutlined,StopOutlined,FormOutlined,DeleteOutlined} from "@ant-design/icons-vue";
 import CreateMember from "./components/CreateMember";
 import Department from "@/views/member/components/Department";
 import {list} from "@/api/member";
@@ -64,15 +76,18 @@ export default {
     Header,
     TeamOutlined,
     CreateMember,
-    UserOutlined
+    StopOutlined,
+    FormOutlined,
+    DeleteOutlined
   },
   setup() {
     return {
       columns: [
         {title: '姓名', slots: {customRender: 'username'}, key: 'username'},
+        {title: '手机', dataIndex: 'mobile', key: 'mobile',width: 200},
         {title: '部门', slots: {customRender: 'department'}, width: 200},
         {title: '添加时间', dataIndex: 'create_time', width: '200px'},
-        {title: '管理', width: 200}
+        {title: '管理',slots:{customRender: 'actions'}, width: 200}
       ]
     }
   },

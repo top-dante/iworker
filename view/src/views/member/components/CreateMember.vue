@@ -1,7 +1,7 @@
 <template>
   <span>
     <a-button type="primary" @click="visible = true">
-      <template #icon><PlusOutlined/></template>
+      <template #icon><UserAddOutlined/></template>
       添加成员
     </a-button>
     <a-modal
@@ -60,14 +60,14 @@
   </span>
 </template>
 <script>
-import {PlusOutlined} from "@ant-design/icons-vue";
+import {UserAddOutlined} from "@ant-design/icons-vue";
 import {create} from "@/api/member";
 import {notice} from "@/plugins/utils";
 
 export default {
   name: "createMember",
   components: {
-    PlusOutlined
+    UserAddOutlined
   },
   data() {
     return {
@@ -108,7 +108,7 @@ export default {
       }, 5000);
     },
     async createMember(data) {
-      data.group_id = this.$store.getters.getGroupId
+      data.group_id = localStorage.getItem('group_id')
       let res = await create(data)
       if (res.code === 200) {
         this.visible = false

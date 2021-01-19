@@ -137,3 +137,12 @@
     background-color: #1890ff;
     transition-duration: .4s;
 }
+
+.action-item+.action-item{
+    margin-left: 16px;
+}
+.action-item:hover{
+    cursor: pointer;
+    color: #1890ff;
+    transition-duration: .4s;
+}

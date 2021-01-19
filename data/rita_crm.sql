@@ -10,7 +10,7 @@ Target Server Type    : MariaDB
 Target Server Version : 100508
 File Encoding         : 65001
 
-Date: 2021-01-18 17:49:02
+Date: 2021-01-19 18:03:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -116,14 +116,16 @@ CREATE TABLE `rita_group_member` (
   `status` int(11) DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `username` (`username`,`email`,`mobile`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of rita_group_member
 -- ----------------------------
 INSERT INTO `rita_group_member` VALUES ('1', '11', 'h0m5ff9c29c772e151', 'imdante', null, null, '62e0e0ode0dmqhe0e0kfod', '1610956918', '1');
 INSERT INTO `rita_group_member` VALUES ('2', '11', 'h0m5ff9c29c772e151', '王斌', null, null, '62e0e0ode0dmqhe0e0kfod', '1610957009', '1');
-INSERT INTO `rita_group_member` VALUES ('3', '10', '', '曾熙', null, null, '62xoe0ode00crldmkfrlrl', '1610957146', '1');
+INSERT INTO `rita_group_member` VALUES ('3', '10', 'h0m5ff9c29c772e151', '曾熙', null, null, '62xoe0ode00crldmkfrlrl', '1610957146', '1');
+INSERT INTO `rita_group_member` VALUES ('4', '10', 'h0m5ff9c29c772e151', '曾熙', null, null, '62odkfode0dmkfrlxorlqh', '1611049834', '1');
+INSERT INTO `rita_group_member` VALUES ('5', '9', 'h0m5ff9c29c772e151', '王建', null, null, '62odkfode0dmkfrlxorlqh', '1611049885', '1');
 
 -- ----------------------------
 -- Table structure for rita_member
