@@ -160,7 +160,6 @@ export default {
 
 <style scoped>
 .department{
-  border-top: 1px solid #f0f0f0;
   min-height: 420px;
   padding-bottom: 30px;
 }
