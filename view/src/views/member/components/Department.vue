@@ -192,7 +192,7 @@ export default {
           this.param.status = -1;
           break
         default:
-          this.param = 'asc';
+          this.param.sort = 'asc';
           this.param.status = 0
       }
       console.log(this.param)
