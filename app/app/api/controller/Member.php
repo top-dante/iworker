@@ -27,6 +27,14 @@ class Member extends Base
         return (new GroupMember())->createMember();
     }
 
+    public function update(): array
+    {
+        return (new GroupMember())->updateMember();
+    }
+
+    public function delete(){
+        return (new GroupMember())->deleteMember();
+    }
     /**
      * 添加团队
      * @return array

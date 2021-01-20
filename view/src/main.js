@@ -24,6 +24,7 @@ router.beforeEach((to, from, next) => {
         }
     }
 })
+
 const app = createApp(App)
 app.use(store);
 app.use(Antd);

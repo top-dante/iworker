@@ -9,6 +9,7 @@ use think\Model;
 
 class GroupMember extends Model
 {
+    protected $pk = 'id';
     /**
      * 添加成员
      * @return array
@@ -35,6 +36,35 @@ class GroupMember extends Model
         }
     }
 
+    public function updateMember(): array
+    {
+        $request = request()->post();
+        $request['mobile'] = encrypt($request['mobile']);
+        try {
+            $this->update($request,['id'=>$request['id']]);
+            return  restful(200,'成员信息更新成功!');
+        }catch (Exception $exception){
+            return restful(500,$exception->getMessage());
+        }
+    }
+
+    /**
+     * 删除用户
+     * @return array
+     */
+    public function deleteMember(): array
+    {
+        $request = request()->get('id','','intval');
+        if(!$request){
+            return restful(403,'无法获取成员ID');
+        }
+        try {
+            $this->where('id',$request)->delete();
+            return restful(200,'成员删除成功');
+        }catch (Exception $exception){
+            return  restful(500,$exception->getMessage());
+        }
+    }
     /**
      * 获取列表
      * @return array

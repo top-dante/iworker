@@ -43,15 +43,18 @@
               <template #department="{ record }">
                 <a-tag>{{ record.department.name }}</a-tag>
               </template>
-              <template #actions>
+              <template #actions="{record}">
                 <a-tooltip title="编辑">
-                  <span class="action-item"><FormOutlined/></span>
+                  <span class="action-item"
+                        @click="editorAction(record,true)">
+                    <FormOutlined/>
+                  </span>
                 </a-tooltip>
                 <a-tooltip title="禁用">
-                  <span class="action-item"><StopOutlined/></span>
+                  <span class="action-item" @click="stopMember(record)"><StopOutlined/></span>
                 </a-tooltip>
                 <a-tooltip title="删除">
-                  <span class="action-item"><DeleteOutlined/></span>
+                  <span class="action-item" @click="delMember(record)"><DeleteOutlined/></span>
                 </a-tooltip>
               </template>
             </a-table>
@@ -59,15 +62,19 @@
         </a-layout-content>
       </a-layout>
     </div>
+    <Update :member-info="memberInfo" :status="editorStatus" :editor-action="editorAction"/>
   </div>
 </template>
 
 <script>
 import Header from "../../components/Header";
-import {TeamOutlined,StopOutlined,FormOutlined,DeleteOutlined} from "@ant-design/icons-vue";
+import {TeamOutlined,StopOutlined,FormOutlined,DeleteOutlined,ExclamationCircleOutlined} from "@ant-design/icons-vue";
 import CreateMember from "./components/CreateMember";
 import Department from "@/views/member/components/Department";
-import {list} from "@/api/member";
+import {createVNode} from 'vue'
+import {list, update,del} from "@/api/member";
+import Update from "@/views/member/components/Update";
+import {notice} from "@/plugins/utils";
 
 export default {
   name: "Index",
@@ -78,7 +85,8 @@ export default {
     CreateMember,
     StopOutlined,
     FormOutlined,
-    DeleteOutlined
+    DeleteOutlined,
+    Update,
   },
   setup() {
     return {
@@ -100,8 +108,11 @@ export default {
         page_size: 15,
         page: 1,
         depart_id: 0,
-        group_id: localStorage.getItem('group_id')
-      }
+        group_id: localStorage.getItem('group_id'),
+        status:1,
+      },
+      memberInfo:{},
+      editorStatus:false
     };
   },
   computed: {
@@ -116,6 +127,9 @@ export default {
     groupId() {
       this.params.group_id = this.$store.getters.getGroupId
       this.getList()
+    },
+    editorStatus(){
+      console.log(this.editorStatus)
     }
   },
   methods: {
@@ -127,6 +141,44 @@ export default {
     },
     selectRowKey(selectedRowKeys) {
       this.selectKey = selectedRowKeys
+    },
+    editorAction(info,visible){
+      this.memberInfo = info
+      this.editorStatus = visible;
+    },
+   stopMember(item){
+      this.$confirm({
+        title:'用户禁用确认',
+        content:'您将禁用成员【'+item.username+'】,请确认！',
+        okText:'确认',
+        okType:'danger',
+        icon: createVNode(ExclamationCircleOutlined),
+        cancelText:'取消',
+        ok:async () => {
+          let res = await update({id: item.id, status: 0})
+          if(res.code === 200){
+            await this.getList()
+          }
+          notice(res.code,res.msg)
+        }
+      })
+    },
+    delMember(item){
+      this.$confirm({
+        title:'用户删除确认',
+        content:'您将伤处成员【'+item.username+'】,此操作不可逆，请谨慎操作！',
+        okText:'确认',
+        okType:'danger',
+        icon: createVNode(ExclamationCircleOutlined),
+        cancelText:'取消',
+        ok:async () => {
+          let res = await del ({id: item.id})
+          if(res.code === 200){
+            await this.getList()
+          }
+          notice(res.code,res.msg)
+        }
+      })
     }
   }
 };

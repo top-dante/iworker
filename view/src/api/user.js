@@ -1,6 +1,7 @@
 import {request} from "@/plugins/request";
 import {notice} from "@/plugins/utils";
 import router from "@/router";
+import store from '@/store'
 
 
 /**
@@ -22,6 +23,8 @@ export function login(data,remember){
                     sessionStorage.setItem('user',JSON.stringify(r.data))
                     sessionStorage.setItem('uid',r.data.uid)
                 }
+                store.commit('setToken',r.data.token)
+                store.commit('setUid',r.data.uid)
                 setTimeout(()=>{
                     router.push('/')
                 },3000)
