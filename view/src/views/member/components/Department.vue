@@ -1,9 +1,9 @@
 <template>
   <div class="department">
     <div class="title">成员</div>
-    <a-menu mode="inline" :style="{borderRight:'none'}">
+    <a-menu mode="inline" :style="{borderRight:'none'}" @click="menuClick">
       <a-menu-item key="all"><TeamOutlined/>所有成员</a-menu-item>
-      <a-menu-item key="desc"><UsergroupAddOutlined/>新加入的成员</a-menu-item>
+      <a-menu-item key="new"><UsergroupAddOutlined/>新加入的成员</a-menu-item>
       <a-menu-item key="stop"><StopOutlined/>已停用成员</a-menu-item>
     </a-menu>
     <div class="title">
@@ -118,6 +118,10 @@ export default {
       current: 0,
       visible: false,
       form: {depart_id: '', name: '', pid: 0, group_id: '', status: 1},
+      param:{
+        status:0,
+        sort:'asc'
+      }
     }
   },
   computed: {
@@ -178,6 +182,20 @@ export default {
         }, 2000)
       }
       notice(res.code, res.msg)
+    },
+    menuClick({key}){
+      switch (key){
+        case 'new':
+          this.param.sort = 'desc';
+          break
+        case 'stop':
+          this.param.status = -1;
+          break
+        default:
+          this.param = 'asc';
+          this.param.status = 0
+      }
+      console.log(this.param)
     }
   }
 }
