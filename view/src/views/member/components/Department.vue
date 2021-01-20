@@ -189,11 +189,11 @@ export default {
           this.param.sort = 'desc';
           break
         case 'stop':
-          this.param.status = -1;
+          this.param.status = 0;
           break
         default:
           this.param.sort = 'asc';
-          this.param.status = 0
+          this.param.status = 1
       }
       console.log(this.param)
     }

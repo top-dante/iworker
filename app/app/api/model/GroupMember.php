@@ -74,11 +74,20 @@ class GroupMember extends Model
     {
         $request = request()->get();
         $map[] = ['group_id','=',$request['group_id']];
+        //检测部门ID
         if($request['depart_id']){
             $child = (new GroupDepartment())->where('pid',$request['depart_id'])->column('depart_id');
             if(!$child){
                 $map[] =['depart_id','=',$request['depart_id']];
             }
+        }
+        if(isset($request['order']) && isset($request['order_by'])){
+            $order = [$request['order_by']=>$request['order']];
+        }else{
+            $order  = ['id'=>'asc'];
+        }
+        if(isset($request['status']) && $request['status']){
+            $map[] = ['status','=',$request['status']];
         }
         //关键字搜索
         if(isset($request['key']) && $request['key']){
@@ -89,9 +98,28 @@ class GroupMember extends Model
 
         $result = $this->where($map)->with(['department'=>function($query){
             $query->field('depart_id,name');
-        }])->paginate($size);
+        }])->order($order)->paginate($size);
 
         return restful(200,'',$result);
+    }
+
+    /**
+     * 更新成员状态
+     * @return array
+     */
+    public function stopMember(): array
+    {
+        $request = request()->get();
+        if(!$request['id']){
+            return restful(403,'无法获取成员ID，请刷新重试！');
+        }
+        try {
+            $this->update($request);
+            $request['status'] ? $msg = "成员启用成功！" : $msg="成员禁用成功！";
+            return  restful(200,$msg);
+        }catch (Exception $exception){
+            return  restful(500,$exception->getMessage());
+        }
     }
 
     /**

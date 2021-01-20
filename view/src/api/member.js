@@ -5,7 +5,8 @@ const apiUrl ={
     update:'member/update',
     list:'member/index',
     get:'member/read',
-    delete:'member/delete'
+    delete:'member/delete',
+    rest:'member/rest'
 }
 
 //创建
@@ -21,11 +22,15 @@ export function update(data){
 export function list(params){
     return request.get(apiUrl.list,params)
 }
+//成员禁用
+export function rest(params){
+    return request.get(apiUrl.rest,params)
+}
 //读取成员信息
 export function getMember(params){
     return request.get(apiUrl.get,params)
 }
 //删除成员
 export function del(params){
-    return request.get(apiUrl.get,params)
+    return request.get(apiUrl.delete,params)
 }

@@ -34,7 +34,7 @@
                 <a-tooltip title="点击查看成员详情" placement="right">
                 <span class="cursor-pointer">
                   <a-avatar :style="{backgroundColor:'#1890ff'}">
-                    {{record.username.slice(0,1)}}
+                    {{ record.username.slice(0, 1) }}
                   </a-avatar>
                   <span class="ml-xs">{{ record.username }}</span>
                 </span>
@@ -51,7 +51,10 @@
                   </span>
                 </a-tooltip>
                 <a-tooltip title="禁用">
-                  <span class="action-item" @click="stopMember(record)"><StopOutlined/></span>
+                  <span class="action-item" @click="stopMember(record)">
+                    <template v-if="record.status"><StopOutlined/></template>
+                    <template v-else><CheckCircleOutlined/></template>
+                  </span>
                 </a-tooltip>
                 <a-tooltip title="删除">
                   <span class="action-item" @click="delMember(record)"><DeleteOutlined/></span>
@@ -68,11 +71,18 @@
 
 <script>
 import Header from "../../components/Header";
-import {TeamOutlined,StopOutlined,FormOutlined,DeleteOutlined,ExclamationCircleOutlined} from "@ant-design/icons-vue";
+import {
+  TeamOutlined,
+  StopOutlined,
+  FormOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+  CheckCircleOutlined
+} from "@ant-design/icons-vue";
 import CreateMember from "./components/CreateMember";
 import Department from "@/views/member/components/Department";
 import {createVNode} from 'vue'
-import {list, update,del} from "@/api/member";
+import {list, rest, del} from "@/api/member";
 import Update from "@/views/member/components/Update";
 import {notice} from "@/plugins/utils";
 
@@ -87,15 +97,16 @@ export default {
     FormOutlined,
     DeleteOutlined,
     Update,
+    CheckCircleOutlined
   },
   setup() {
     return {
       columns: [
         {title: '姓名', slots: {customRender: 'username'}, key: 'username'},
-        {title: '手机', dataIndex: 'mobile', key: 'mobile',width: 200},
+        {title: '手机', dataIndex: 'mobile', key: 'mobile', width: 200},
         {title: '部门', slots: {customRender: 'department'}, width: 200},
         {title: '添加时间', dataIndex: 'create_time', width: '200px'},
-        {title: '管理',slots:{customRender: 'actions'}, width: 200}
+        {title: '管理', slots: {customRender: 'actions'}, width: 200}
       ]
     }
   },
@@ -109,10 +120,12 @@ export default {
         page: 1,
         depart_id: 0,
         group_id: localStorage.getItem('group_id'),
-        status:1,
+        status: 1,
+        order: 'asc',
+        order_by: 'id'
       },
-      memberInfo:{},
-      editorStatus:false
+      memberInfo: {},
+      editorStatus: false
     };
   },
   computed: {
@@ -128,7 +141,7 @@ export default {
       this.params.group_id = this.$store.getters.getGroupId
       this.getList()
     },
-    editorStatus(){
+    editorStatus() {
       console.log(this.editorStatus)
     }
   },
@@ -142,44 +155,46 @@ export default {
     selectRowKey(selectedRowKeys) {
       this.selectKey = selectedRowKeys
     },
-    editorAction(info,visible){
+    editorAction(info, visible) {
       this.memberInfo = info
       this.editorStatus = visible;
     },
-   stopMember(item){
+    stopMember(item) {
       this.$confirm({
-        title:'用户禁用确认',
-        content:'您将禁用成员【'+item.username+'】,请确认！',
-        okText:'确认',
-        okType:'danger',
+        title: '用户禁用确认',
+        content: '您将禁用成员【' + item.username + '】,请确认！',
+        okText: '确认',
+        okType: 'danger',
         icon: createVNode(ExclamationCircleOutlined),
-        cancelText:'取消',
-        ok:async () => {
-          let res = await update({id: item.id, status: 0})
-          if(res.code === 200){
+        cancelText: '取消',
+        onOk: async () => {
+          item.status ? item.status = 0 : item.status = 1
+          let res = await rest({id: item.id, status: item.status})
+          if (res.code === 200) {
             await this.getList()
           }
-          notice(res.code,res.msg)
+          notice(res.code, res.msg)
         }
       })
     },
-    delMember(item){
+    delMember(item) {
       this.$confirm({
-        title:'用户删除确认',
-        content:'您将伤处成员【'+item.username+'】,此操作不可逆，请谨慎操作！',
-        okText:'确认',
-        okType:'danger',
+        title: '用户删除确认',
+        content: '您将伤处成员【' + item.username + '】,此操作不可逆，请谨慎操作！',
+        okText: '确认',
+        okType: 'danger',
         icon: createVNode(ExclamationCircleOutlined),
-        cancelText:'取消',
-        ok:async () => {
-          let res = await del ({id: item.id})
-          if(res.code === 200){
+        cancelText: '取消',
+        onOk: async () => {
+          let res = await del({id: item.id})
+          if (res.code === 200) {
             await this.getList()
           }
-          notice(res.code,res.msg)
+          notice(res.code, res.msg)
         }
       })
-    }
+    },
+
   }
 };
 </script>

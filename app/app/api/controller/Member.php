@@ -27,12 +27,31 @@ class Member extends Base
         return (new GroupMember())->createMember();
     }
 
+
+    /**
+     * 成员状态更新
+     * @return array
+     */
+    public function rest(): array
+    {
+        return (new GroupMember())->stopMember();
+    }
+
+    /**
+     * 更新成员
+     * @return array
+     */
     public function update(): array
     {
         return (new GroupMember())->updateMember();
     }
 
-    public function delete(){
+    /**
+     * 删除成员
+     * @return array
+     */
+    public function delete(): array
+    {
         return (new GroupMember())->deleteMember();
     }
     /**
