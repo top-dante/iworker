@@ -62,6 +62,7 @@
               </template>
             </a-table>
           </a-card>
+          <Pagination :total="total" :params="pageParams"/>
         </a-layout-content>
       </a-layout>
     </div>
@@ -85,7 +86,7 @@ import {createVNode} from 'vue'
 import {list, rest, del} from "@/api/member";
 import Update from "@/views/member/components/Update";
 import {notice} from "@/plugins/utils";
-
+import Pagination from "@/components/Pagination";
 export default {
   name: "Index",
   components: {
@@ -97,7 +98,8 @@ export default {
     FormOutlined,
     DeleteOutlined,
     Update,
-    CheckCircleOutlined
+    CheckCircleOutlined,
+    Pagination
   },
   setup() {
     return {
@@ -126,7 +128,8 @@ export default {
       },
       memberInfo: {},
       editorStatus: false,
-      siderWidth:200
+      siderWidth:200,
+      total:0
     };
   },
   computed: {
@@ -151,6 +154,7 @@ export default {
       let res = await list(this.params);
       if (res.code === 200) {
         this.list = res.data.data
+        this.total = res.data.total
       }
     },
     selectRowKey(selectedRowKeys) {
@@ -199,6 +203,11 @@ export default {
       this.params.depart_id = param.depart_id
       this.params.status = param.status
       this.params.order = param.sort
+      this.getList()
+    },
+    pageParams(page, pageSize){
+      this.params.page = page
+      this.params.page_size = pageSize
       this.getList()
     }
   }

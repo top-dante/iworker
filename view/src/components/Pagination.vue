@@ -7,8 +7,8 @@
                 :total="total"
                 :hideOnSinglePage="true"
                 :show-total="total => `共 ${total} 条记录`"
-                @change="onChange"
-                @showSizeChange="onShowSizeChange"
+                @change="params"
+                @showSizeChange="params"
         >
             <template #itemRender="{type, originalElement }">
                 <a-button v-if="type === 'prev'">上一页</a-button>
@@ -26,32 +26,14 @@
     }
     export default {
         name: "Pagination",
-        props:{
-            total:{
-                type:Number,
-                default:0
-            },
-            callback:{
-                type: function () {
-
-                }
-            }
-        },
+        props:['total','params'],
         components: {
             renderVNode,
         },
         data(){
             return {
                 current:1,
-                pageSize: 20,
-            }
-        },
-        methods:{
-            onShowSizeChange(current, pageSize) {
-                this.$emit('params',{page:current,pageSize:pageSize})
-            },
-            onChange(page, pageSize){
-                this.$emit('params',{page:page,pageSize:pageSize})
+                pageSize: 15
             }
         }
     }
