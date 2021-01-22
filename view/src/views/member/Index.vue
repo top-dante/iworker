@@ -4,7 +4,7 @@
     <div class="wrapper-content">
       <a-layout :style="{ minHeight: '280px' }">
         <!--//sider-->
-        <a-layout-sider theme="light" :width="280" :style="{ borderRadius: '2px' }">
+        <a-layout-sider theme="light" :width="240" :style="{ borderRadius: '2px' }">
           <Department :param-back="paramBack"/>
         </a-layout-sider>
         <!--content-->
@@ -103,10 +103,10 @@ export default {
     return {
       columns: [
         {title: '姓名', slots: {customRender: 'username'}, key: 'username'},
-        {title: '手机', dataIndex: 'mobile', key: 'mobile', width: 200},
-        {title: '部门', slots: {customRender: 'department'}, width: 200},
+        {title: '手机', dataIndex: 'mobile', key: 'mobile', width: 120},
+        {title: '部门', slots: {customRender: 'department'}, width: 120},
         {title: '添加时间', dataIndex: 'create_time', width: '200px'},
-        {title: '管理', slots: {customRender: 'actions'}, width: 200}
+        {title: '管理', slots: {customRender: 'actions'}, width: 120}
       ]
     }
   },
@@ -125,7 +125,8 @@ export default {
         order_by: 'id'
       },
       memberInfo: {},
-      editorStatus: false
+      editorStatus: false,
+      siderWidth:200
     };
   },
   computed: {
