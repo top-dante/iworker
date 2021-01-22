@@ -75,8 +75,10 @@ class GroupMember extends Model
         $request = request()->get();
         $map[] = ['group_id','=',$request['group_id']];
         //检测部门ID
-        if($request['depart_id']){
-            $child = (new GroupDepartment())->where('pid',$request['depart_id'])->column('depart_id');
+        if(isset($request['depart_id']) && $request['depart_id']){
+            $child = (new GroupDepartment())
+                ->where('pid',$request['depart_id'])
+                ->column('depart_id');
 
             if(!$child || count($child) === 1){
                 $map[] =['depart_id','=',$request['depart_id']];
@@ -90,19 +92,18 @@ class GroupMember extends Model
         }else{
             $order  = ['id'=>'asc'];
         }
-
-        $map[] = ['status','=',$request['status']];
+        if(isset($request['status'])){
+            $map[] = ['status','=',$request['status']];
+        }
 
         //关键字搜索
         if(isset($request['key']) && $request['key']){
             $map[] = ['username','like',"%$request[key]%"];
         }
-        //接收分页大小 不设置默认15条
-        $request['page_size'] ? $size = $request['page_size'] : $size = 15;
 
         $result = $this->where($map)->with(['department'=>function($query){
             $query->field('depart_id,name,color');
-        }])->order($order)->paginate($size);
+        }])->order($order)->select();
 
         return restful(200,'',$result);
     }

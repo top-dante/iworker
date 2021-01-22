@@ -4,7 +4,8 @@ export default createStore({
   state: {
     token:undefined,
     group_id:undefined,
-    uid:undefined
+    uid:undefined,
+    team:[]
   },
   getters:{
     getToken(state){
@@ -15,6 +16,16 @@ export default createStore({
     },
     getUid(state){
       return state.uid
+    },
+    team(state){
+      if(state.list){
+        return  state.list
+      }else {
+        let team = localStorage.getItem('team')
+        if(team){
+          return JSON.parse(team)
+        }
+      }
     }
   },
   mutations: {
@@ -26,6 +37,10 @@ export default createStore({
     },
     setUid(state,uid){
       state.uid = uid
+    },
+    team(state,data){
+      state.list = data
+      localStorage.setItem('team',JSON.stringify(data))
     }
   },
   actions: {
