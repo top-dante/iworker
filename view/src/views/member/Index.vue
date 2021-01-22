@@ -5,7 +5,7 @@
       <a-layout :style="{ minHeight: '280px' }">
         <!--//sider-->
         <a-layout-sider theme="light" :width="280" :style="{ borderRadius: '2px' }">
-          <Department/>
+          <Department :param-back="paramBack"/>
         </a-layout-sider>
         <!--content-->
         <a-layout-content :style="{ paddingLeft: '24px' }">
@@ -41,7 +41,7 @@
                 </a-tooltip>
               </template>
               <template #department="{ record }">
-                <a-tag>{{ record.department.name }}</a-tag>
+                <a-tag :color="record.department.color">{{ record.department.name }}</a-tag>
               </template>
               <template #actions="{record}">
                 <a-tooltip title="编辑">
@@ -194,7 +194,12 @@ export default {
         }
       })
     },
-
+    paramBack(param){
+      this.params.depart_id = param.depart_id
+      this.params.status = param.status
+      this.params.order = param.sort
+      this.getList()
+    }
   }
 };
 </script>

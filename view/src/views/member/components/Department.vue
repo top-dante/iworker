@@ -2,15 +2,23 @@
   <div class="department">
     <div class="title">成员</div>
     <a-menu mode="inline" :style="{borderRight:'none'}" @click="menuClick">
-      <a-menu-item key="all"><TeamOutlined/>所有成员</a-menu-item>
-      <a-menu-item key="new"><UsergroupAddOutlined/>新加入的成员</a-menu-item>
-      <a-menu-item key="stop"><StopOutlined/>已停用成员</a-menu-item>
-    </a-menu>
-    <div class="title">
-      部门
-      <CreateDepartment :callback="callback"/>
-    </div>
-    <a-menu @click="menuOnClick" mode="inline" :style="{borderRight:'none'}">
+      <a-menu-item key="all">
+        <TeamOutlined/>
+        所有成员
+      </a-menu-item>
+      <a-menu-item key="new">
+        <UsergroupAddOutlined/>
+        新加入的成员
+      </a-menu-item>
+      <a-menu-item key="stop">
+        <StopOutlined/>
+        已停用成员
+      </a-menu-item>
+      <a-menu-item-group>
+        <template #title>部门
+          <CreateDepartment :callback="callback"/>
+        </template>
+      </a-menu-item-group>
       <a-menu-item :key="0">
         <BulbOutlined/>
         所有部门
@@ -69,7 +77,25 @@
              title="部门编辑">
       <a-form layout="vertical">
         <a-form-item>
-          <a-input v-model:value="form.name"/>
+          <a-input v-model:value="form.name">
+            <template #suffix>
+              <a-dropdown>
+                <a-tag :color="tagColor" :style="{marginRight:0}">
+                  {{form.name ? form.name:'部门标签'}}
+                </a-tag>
+                <template #overlay>
+                  <a-menu @click="colorSelect">
+                    <a-menu-item :key="0">
+                      <a-tag>{{form.name ? form.name:'部门标签'}}</a-tag>
+                    </a-menu-item>
+                    <a-menu-item v-for="item in color" :key="item">
+                      <a-tag :color="item">{{form.name ? form.name:'部门标签'}}</a-tag>
+                    </a-menu-item>
+                  </a-menu>
+                </template>
+              </a-dropdown>
+            </template>
+          </a-input>
         </a-form-item>
         <a-form-item>
           <a-select v-model:value="form.pid">
@@ -104,6 +130,7 @@ import {notice} from "@/plugins/utils";
 
 export default {
   name: "Department",
+  props: ['paramBack'],
   components: {
     BulbOutlined,
     CreateDepartment,
@@ -115,13 +142,10 @@ export default {
   data() {
     return {
       department: [],
-      current: 0,
       visible: false,
-      form: {depart_id: '', name: '', pid: 0, group_id: '', status: 1},
-      param:{
-        status:0,
-        sort:'asc'
-      }
+      form: {depart_id: '', name: '', pid: 0, group_id: '', status: 1,color:''},
+      color:['pink','red','orange','green','cyan','blue','purple'],
+      tagColor:''
     }
   },
   computed: {
@@ -138,9 +162,6 @@ export default {
     this.getDepartmentList()
   },
   methods: {
-    menuOnClick({key}) {
-      this.current = key
-    },
     async getDepartmentList() {
       let res = await list()
       if (res.code === 200) {
@@ -174,6 +195,7 @@ export default {
       this.visible = true
     },
     async updateDepartment() {
+      this.form.color = this.tagColor
       let res = await update(this.form);
       if (res.code === 200) {
         setTimeout(() => {
@@ -183,19 +205,19 @@ export default {
       }
       notice(res.code, res.msg)
     },
-    menuClick({key}){
-      switch (key){
-        case 'new':
-          this.param.sort = 'desc';
-          break
-        case 'stop':
-          this.param.status = 0;
-          break
-        default:
-          this.param.sort = 'asc';
-          this.param.status = 1
-      }
-      console.log(this.param)
+    menuClick({key}) {
+      let params = {sort: 'asc', status: 1, depart_id: 0}
+      //如果不是选择最新加入 排序为默认 asc
+      key=== 'new' ? params.sort = 'desc' :params.sort='asc';
+      //筛选停用成员 status =0
+      key === 'stop' ? params.status =0 :params.status =1;
+      //非选择停用成员 部门id为 key
+      key !=='stop' && key!=='all' && key !=='new' ? params.depart_id = key : params.depart_id = 0;
+
+      this.paramBack(params)
+    },
+    colorSelect({key}){
+      key ? this.tagColor = key :this.tagColor = ""
     }
   }
 }

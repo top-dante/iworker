@@ -15,7 +15,25 @@
               @finish="onSubmit"
               :rules="rules">
         <a-form-item name="name">
-          <a-input v-model:value="form.name" placeholder="请输入部门名称"/>
+          <a-input v-model:value="form.name" placeholder="请输入部门名称">
+            <template #suffix>
+              <a-dropdown>
+                 <a-tag :color="tagColor" :style="{marginRight:0}">
+                   {{form.name ? form.name:'部门标签'}}
+                 </a-tag>
+                <template #overlay>
+                  <a-menu @click="colorSelect">
+                    <a-menu-item :key="0">
+                      <a-tag>{{form.name ? form.name:'部门标签'}}</a-tag>
+                    </a-menu-item>
+                    <a-menu-item v-for="item in color" :key="item">
+                     <a-tag :color="item">{{form.name ? form.name:'部门标签'}}</a-tag>
+                    </a-menu-item>
+                  </a-menu>
+                </template>
+              </a-dropdown>
+            </template>
+          </a-input>
         </a-form-item>
         <a-form-item name="pid">
          <a-select placeholder="请选择所属团队"
@@ -49,6 +67,12 @@ export default {
   components: {
     PlusCircleOutlined
   },
+  setup(){
+    const color = ['pink','red','orange','green','cyan','blue','purple']
+    return {
+      color
+    }
+  },
   data() {
     return {
       visible: false,
@@ -59,8 +83,9 @@ export default {
           {required: true, message: '部门名称不能为空'},
           {max: 20, message: '部门名称不能超过20个字符'}
         ],
-        pid: [{required: true, type:'number',message: '请选择上级部门'}]
-      }
+        pid: [{required: true, type:'number',message: '请选择上级部门'}],
+      },
+      tagColor:''
     }
   },
   created() {
@@ -69,6 +94,7 @@ export default {
   methods: {
     async onSubmit(data) {
       data.group_id = localStorage.getItem('group_id')
+      data.color = this.tagColor
       let res = await create(data);
       if(res.code === 200){
         this.visible = false;
@@ -80,6 +106,9 @@ export default {
 
       }
       notice(res.code,res.msg)
+    },
+    colorSelect({key}){
+      key ? this.tagColor = key :this.tagColor = ""
     }
   }
 }

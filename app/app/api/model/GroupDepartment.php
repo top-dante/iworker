@@ -21,7 +21,8 @@ class GroupDepartment extends Model
         $data=[
             'name'=>$request['name'],
             'group_id'=>$request['group_id'],
-            'pid'=>$request['pid']
+            'pid'=>$request['pid'],
+            'color'=>$request['color']
         ];
         $check = $this->where('name',$request['name'])
             ->where('group_id',$request['group_id'])

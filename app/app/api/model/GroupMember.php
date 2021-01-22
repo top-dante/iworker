@@ -77,8 +77,12 @@ class GroupMember extends Model
         //检测部门ID
         if($request['depart_id']){
             $child = (new GroupDepartment())->where('pid',$request['depart_id'])->column('depart_id');
-            if(!$child){
+
+            if(!$child || count($child) === 1){
                 $map[] =['depart_id','=',$request['depart_id']];
+            }else{
+                $id = implode(',',$child);
+                $map[] = ['depart_id','in',$id];
             }
         }
         if(isset($request['order']) && isset($request['order_by'])){
@@ -86,9 +90,9 @@ class GroupMember extends Model
         }else{
             $order  = ['id'=>'asc'];
         }
-        if(isset($request['status']) && $request['status']){
-            $map[] = ['status','=',$request['status']];
-        }
+
+        $map[] = ['status','=',$request['status']];
+
         //关键字搜索
         if(isset($request['key']) && $request['key']){
             $map[] = ['username','like',"%$request[key]%"];
@@ -97,7 +101,7 @@ class GroupMember extends Model
         $request['page_size'] ? $size = $request['page_size'] : $size = 15;
 
         $result = $this->where($map)->with(['department'=>function($query){
-            $query->field('depart_id,name');
+            $query->field('depart_id,name,color');
         }])->order($order)->paginate($size);
 
         return restful(200,'',$result);
