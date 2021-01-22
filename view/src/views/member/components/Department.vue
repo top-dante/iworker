@@ -30,6 +30,17 @@
             <a-menu-item :key="item.depart_id">
               <BulbOutlined/>
               {{ item.name }}
+              <a-dropdown placement="bottomCenter">
+                      <span class="dropdown-icon">
+                       <span class="ellipsis"></span>
+                      </span>
+                <template #overlay>
+                  <a-menu>
+                    <a-menu-item @click="onUpdate(item)">编辑</a-menu-item>
+                    <a-menu-item @click="delDepartment(item)">删除</a-menu-item>
+                  </a-menu>
+                </template>
+              </a-dropdown>
             </a-menu-item>
             <a-menu-item v-for="vo in item.children" :key="vo.depart_id">
               <BulbOutlined/>
